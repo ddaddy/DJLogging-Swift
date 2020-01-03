@@ -19,11 +19,11 @@ public func LogMethodCall(function: String = #function, file: String = #file, li
 
 public func LogMethodCallWithUUID(_ uuid: String?, function: String = #function, file: String = #file, line: Int = #line) {
     let lastPathComponent = URL.init(string: file)?.lastPathComponent ?? ""
-    LogManager.logString(string: "\(function) file:\(lastPathComponent) line:\(line)", uuid: uuid)
+    LogManager.logString("\(function) file:\(lastPathComponent) line:\(line)", uuid: uuid)
 }
 
 public func LogRequestResponse(uuid: String?, response: URLResponse?, data: Data?, error: Error?) {
-    LogManager.logRequestResponse(response: response, data: data, error: error as NSError?, uuid: uuid)
+    LogManager.logRequestResponse(response, data: data, error: error as NSError?, uuid: uuid)
 }
 
 @objc(LogManager)
@@ -67,7 +67,7 @@ public class LogManager: NSObject {
         return currentLog
     }
     
-    @objc public static func logString(string:String, uuid:String?) {
+    @objc public static func logString(_ string:String, uuid:String?) {
         
         sharedInstance.checkLogLength()
         sharedInstance.logDate()
@@ -82,7 +82,7 @@ public class LogManager: NSObject {
         }
     }
     
-    @objc public static func logString(string:String, data:Data?, uuid:String?) {
+    @objc public static func logString(_ string:String, data:Data?, uuid:String?) {
         
         sharedInstance.checkLogLength()
         sharedInstance.logDate()
@@ -103,7 +103,7 @@ public class LogManager: NSObject {
         }
     }
     
-    @objc public static func logRequestResponse(response:URLResponse?, data:Data?, error:NSError?, uuid:String?) {
+    @objc public static func logRequestResponse(_ response:URLResponse?, data:Data?, error:NSError?, uuid:String?) {
         
         var underlyingError:NSError? = nil
         if error != nil

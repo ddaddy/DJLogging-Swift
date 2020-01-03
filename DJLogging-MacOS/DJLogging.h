@@ -17,5 +17,5 @@ FOUNDATION_EXPORT const unsigned char DJLogging_MacOSVersionString[];
 // In this header, you should import all the public headers of your framework using statements like #import <DJLogging_MacOS/PublicHeader.h>
 
 #define LogMethodCall LogMethodCallWithUUID(nil);
-#define LogMethodCallWithUUID(x) [LogManager logStringWithString:[NSString stringWithFormat:@"%s", __PRETTY_FUNCTION__] uuid:(x)];
-#define LogRequestResponseWithUUID(x) [LogManager logRequestResponseWithResponse:response data:data error:error uuid:(x)];
+#define LogMethodCallWithUUID(x) [LogManager logString:[NSString stringWithFormat:@"%s", __PRETTY_FUNCTION__] uuid:(x)];
+#define LogRequestResponseWithUUID(x) [LogManager logRequestResponse:response data:data error:error uuid:(x)];
