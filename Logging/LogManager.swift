@@ -69,88 +69,101 @@ public class LogManager: NSObject {
     
     @objc public static func logString(_ string:String, uuid:String?) {
         
-        sharedInstance.checkLogLength()
-        sharedInstance.logDate()
-        sharedInstance.logTab()
-        sharedInstance.logUUID(uuid: uuid)
-        sharedInstance.logTab()
-        sharedInstance.logString(string: string + "\n")
-        
-        if debugLogsToScreen
-        {
-            print("****LogManager**** \(uuid ?? "NO_UUID") \(string)")
+        sharedInstance.serialQueue.async {
+            
+            sharedInstance.checkLogLength()
+            sharedInstance.logDate()
+            sharedInstance.logTab()
+            sharedInstance.logUUID(uuid: uuid)
+            sharedInstance.logTab()
+            sharedInstance.logString(string: string + "\n")
+            
+            if debugLogsToScreen
+            {
+                print("****LogManager**** \(uuid ?? "NO_UUID") \(string)")
+            }
         }
     }
     
     @objc public static func logString(_ string:String, data:Data?, uuid:String?) {
         
-        sharedInstance.checkLogLength()
-        sharedInstance.logDate()
-        sharedInstance.logTab()
-        sharedInstance.logUUID(uuid: uuid)
-        sharedInstance.logTab()
-        sharedInstance.logString(string: string, data: data)
-        
-        if debugLogsToScreen
-        {
-            var _data = data
-            if _data == nil
+        sharedInstance.serialQueue.async {
+            
+            sharedInstance.checkLogLength()
+            sharedInstance.logDate()
+            sharedInstance.logTab()
+            sharedInstance.logUUID(uuid: uuid)
+            sharedInstance.logTab()
+            sharedInstance.logString(string: string, data: data)
+            
+            if debugLogsToScreen
             {
-                _data = Data.init()
+                var _data = data
+                if _data == nil
+                {
+                    _data = Data.init()
+                }
+                let dataMap = _data!.map { String(format: "%02x", $0)}.joined()
+                print("****LogManager**** \(uuid ?? "NO_UUID") \(string) data:\(dataMap)")
             }
-            let dataMap = _data!.map { String(format: "%02x", $0)}.joined()
-            print("****LogManager**** \(uuid ?? "NO_UUID") \(string) data:\(dataMap)")
         }
     }
     
     @objc public static func logRequestResponse(_ response:URLResponse?, data:Data?, error:NSError?, uuid:String?) {
         
-        var underlyingError:NSError? = nil
-        if error != nil
-        {
-            if (error!.userInfo[NSUnderlyingErrorKey] != nil)
+        sharedInstance.serialQueue.async {
+            
+            var underlyingError:NSError? = nil
+            if error != nil
             {
-                underlyingError = error!.userInfo[NSUnderlyingErrorKey] as? NSError
-                print("underlyingError: \(underlyingError!)")
+                if (error!.userInfo[NSUnderlyingErrorKey] != nil)
+                {
+                    underlyingError = error!.userInfo[NSUnderlyingErrorKey] as? NSError
+                    print("underlyingError: \(underlyingError!)")
+                }
+            }
+            
+            sharedInstance.checkLogLength()
+            sharedInstance.logDate()
+            sharedInstance.logTab()
+            sharedInstance.logUUID(uuid: uuid)
+            sharedInstance.logTab()
+            
+            let string = """
+                Finished with status code: \(response?.getStatusCode() ?? 0)
+                Response: \(response?.description ?? "")
+                Error: \(error?.description ?? "")
+                """ + (underlyingError != nil ? "\nUnderlyingError ":"")
+                + (underlyingError != nil ? underlyingError!.description:"")
+            
+            sharedInstance.logString(string: string, data: data)
+            
+            if debugLogsToScreen
+            {
+                var _data = data
+                if _data == nil
+                {
+                    _data = Data.init()
+                }
+                let dataMap = _data!.map { String(format: "%02x", $0)}.joined()
+                print("****LogManager**** \(uuid ?? "NO_UUID") \(string) data:\(dataMap)")
             }
         }
-        
-        sharedInstance.checkLogLength()
-        sharedInstance.logDate()
-        sharedInstance.logTab()
-        sharedInstance.logUUID(uuid: uuid)
-        sharedInstance.logTab()
-
-        let string = """
-            Finished with status code: \(response?.getStatusCode() ?? 0)
-            Response: \(response?.description ?? "")
-            Error: \(error?.description ?? "")
-            """ + (underlyingError != nil ? "\nUnderlyingError ":"")
-            + (underlyingError != nil ? underlyingError!.description:"")
-        
-        sharedInstance.logString(string: string, data: data)
-        
-        if debugLogsToScreen
-        {
-            var _data = data
-            if _data == nil
-            {
-                _data = Data.init()
-            }
-            let dataMap = _data!.map { String(format: "%02x", $0)}.joined()
-            print("****LogManager**** \(uuid ?? "NO_UUID") \(string) data:\(dataMap)")
-        }
-        
     }
     
     @objc public static func clearLog() {
-        sharedInstance._logString = NSMutableAttributedString.init(string: "")
+        
+        sharedInstance.serialQueue.async {
+            
+            sharedInstance._logString = NSMutableAttributedString.init(string: "")
+        }
     }
     
     // MARK: Private Properties
     
     private static let sharedInstance = LogManager()
     private var _logString: NSMutableAttributedString?
+    private let serialQueue = DispatchQueue(label: "DJLoggingSerialQueue")
     
     // MARK: - Init
 
