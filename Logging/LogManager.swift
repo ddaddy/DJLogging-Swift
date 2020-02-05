@@ -176,7 +176,8 @@ public class LogManager: NSObject {
         let attributes: [NSAttributedString.Key: Any] = [
             .foregroundColor: colour
         ]
-        _logString?.append(NSAttributedString(string: string, attributes: attributes))
+        let newString = NSAttributedString(string: string, attributes: attributes)
+        _logString?.append(newString)
     }
     
     private func logString(string:String, data:Data?) {
