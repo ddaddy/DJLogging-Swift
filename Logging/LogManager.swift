@@ -18,7 +18,7 @@ public func LogMethodCall(function: String = #function, file: String = #file, li
 }
 
 public func LogMethodCallWithUUID(_ uuid: String?, function: String = #function, file: String = #file, line: Int = #line) {
-    let lastPathComponent = URL.init(string: file)?.lastPathComponent ?? ""
+    let lastPathComponent = URL.init(fileURLWithPath: file).lastPathComponent
     LogManager.logString("\(function) file:\(lastPathComponent) line:\(line)", uuid: uuid)
 }
 
