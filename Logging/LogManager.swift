@@ -63,8 +63,8 @@ public class LogManager: NSObject {
         ]
         currentLog.append(NSAttributedString(string: "Appname: \(appName) Version: \(appVersion) Build: \(appBuild)\n", attributes: attributes))
         currentLog.append(NSAttributedString(string: "SysInfo: \(SysInfo.sysInfo())\n"))
-        currentLog.append(NSAttributedString(string: "Time/Date: \(Date().localFormat())"))
-        currentLog.append(NSAttributedString(string: "Timezone: \(TimeZone.current.description)"))
+        currentLog.append(NSAttributedString(string: "Time/Date: \(Date().localFormat())\n"))
+        currentLog.append(NSAttributedString(string: "Timezone: \(TimeZone.current.description)\n"))
         
         return currentLog
     }
@@ -182,8 +182,8 @@ public class LogManager: NSObject {
         logString(string: "LogManager Start\n")
         logString(string: "Appname: \(appName) Version: \(appVersion) Build: \(appBuild)\n")
         logString(string: "SysInfo: \(SysInfo.sysInfo())\n")
-        logString(string: "Time/Date: \(Date().localFormat())")
-        logString(string: "Timezone: \(TimeZone.current.description)")
+        logString(string: "Time/Date: \(Date().localFormat())\n")
+        logString(string: "Timezone: \(TimeZone.current.description)\n")
     }
     
     // MARK: - Internal
