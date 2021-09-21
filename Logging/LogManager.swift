@@ -63,6 +63,8 @@ public class LogManager: NSObject {
         ]
         currentLog.append(NSAttributedString(string: "Appname: \(appName) Version: \(appVersion) Build: \(appBuild)\n", attributes: attributes))
         currentLog.append(NSAttributedString(string: "SysInfo: \(SysInfo.sysInfo())\n"))
+        currentLog.append(NSAttributedString(string: "Time/Date: \(Date().localFormat())"))
+        currentLog.append(NSAttributedString(string: "Timezone: \(TimeZone.current.description)"))
         
         return currentLog
     }
@@ -180,6 +182,8 @@ public class LogManager: NSObject {
         logString(string: "LogManager Start\n")
         logString(string: "Appname: \(appName) Version: \(appVersion) Build: \(appBuild)\n")
         logString(string: "SysInfo: \(SysInfo.sysInfo())\n")
+        logString(string: "Time/Date: \(Date().localFormat())")
+        logString(string: "Timezone: \(TimeZone.current.description)")
     }
     
     // MARK: - Internal
@@ -270,5 +274,15 @@ fileprivate extension URLResponse {
             return httpResponse.statusCode
         }
         return nil
+    }
+}
+
+fileprivate extension Date {
+    
+    func localFormat() -> String {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .full
+        formatter.timeStyle = .full
+        return formatter.string(from: self)
     }
 }
