@@ -16,10 +16,23 @@ import UIKit
 public func LogMethodCall(function: String = #function, file: String = #file, line: Int = #line) {
     LogMethodCallWithUUID(nil, function: function, file: file, line: line)
 }
+public func LogMethodCall(function: String = #function, file: String = #file, line: Int = #line, _ param: String?) {
+    LogMethodCallWithUUID(nil, function: function, file: file, line: line, param: param ?? "")
+}
+public func LogMethodCall(function: String = #function, file: String = #file, line: Int = #line, _ param: Double?) {
+    LogMethodCallWithUUID(nil, function: function, file: file, line: line, param: param != nil ? String(param!) : "")
+}
+public func LogMethodCall(function: String = #function, file: String = #file, line: Int = #line, _ param: Int?) {
+    LogMethodCallWithUUID(nil, function: function, file: file, line: line, param: param != nil ? String(param!) : "")
+}
 
 public func LogMethodCallWithUUID(_ uuid: String?, function: String = #function, file: String = #file, line: Int = #line) {
     let lastPathComponent = URL.init(fileURLWithPath: file).lastPathComponent
     LogManager.logString("\(function) file:\(lastPathComponent) line:\(line)", uuid: uuid)
+}
+public func LogMethodCallWithUUID(_ uuid: String?, function: String = #function, file: String = #file, line: Int = #line, param: String) {
+    let lastPathComponent = URL.init(fileURLWithPath: file).lastPathComponent
+    LogManager.logString("\(function) file:\(lastPathComponent) line:\(line) param:\(param)", uuid: uuid)
 }
 
 public func LogRequestResponse(uuid: String?, response: URLResponse?, data: Data?, error: Error?) {
