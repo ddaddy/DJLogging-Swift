@@ -17,6 +17,14 @@ let package = Package(
         .target(
             name: "DJLogging",
             path: "Logging/",
+            exclude: [
+                "../DJLogging-iOS/",
+                "../DJLogging-MacOS/",
+                "../Example-iOS-ObjC/",
+                "../Example-iOS-Swift/",
+                "../Example-Mac-ObjC/",
+                "../Example-Mac-Swift/"
+            ],
             sources: ["../Logging/"]
         )
     ]
