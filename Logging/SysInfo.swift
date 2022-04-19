@@ -11,6 +11,8 @@ import Foundation
 import UIKit
 #elseif os(macOS)
 
+#elseif os(watchOS)
+import WatchKit
 #endif
 
 internal class SysInfo {
@@ -21,6 +23,8 @@ internal class SysInfo {
         #elseif os(macOS)
         let operatingSystemVersion = ProcessInfo.processInfo.operatingSystemVersionString
         return "MacOS/\(operatingSystemVersion) (\(machineModel()))"
+        #elseif os(watchOS)
+        return "\(WKInterfaceDevice.current().systemName)/\(WKInterfaceDevice.current().systemVersion) (\(machineModel()))"
         #endif
     }
     
@@ -29,6 +33,8 @@ internal class SysInfo {
         return UIDevice.current.modelName
         #elseif os(macOS)
         return modelIdentifier() ?? "Unknown"
+        #elseif os(watchOS)
+        return WKInterfaceDevice.current().model
         #endif
     }
     

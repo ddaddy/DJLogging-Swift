@@ -12,6 +12,9 @@ typealias UniversalColor = UIColor
 #elseif os(macOS)
 import Cocoa
 typealias UniversalColor = NSColor
+#elseif os(watchOS)
+import WatchKit
+typealias UniversalColor = UIColor
 #endif
 
 internal extension UniversalColor {
