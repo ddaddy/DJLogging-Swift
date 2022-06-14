@@ -14,7 +14,7 @@ class ViewController: UIViewController, MFMailComposeViewControllerDelegate {
     
     override func viewDidLoad() {
         
-        LogMethodCall()
+        LogMethodCall(type: .ui)
         
         super.viewDidLoad()
         
@@ -22,21 +22,21 @@ class ViewController: UIViewController, MFMailComposeViewControllerDelegate {
     }
     
     func makeAWebRequest() {
-        let stringUUID = UUID().uuidString
-        LogMethodCallWithUUID(stringUUID)
+        let uuid = UUID()
+        LogMethodCall(uuid, type: .comms)
         
         let request = URLRequest(url: URL(string: "https://venderbase.com")!)
         let session = URLSession(configuration: .default)
         let task = session.dataTask(with: request) { (data, response, error) in
             
-            LogRequestResponse(uuid: stringUUID, response: response, data: data, error: error)
+            LogRequestResponse(uuid: uuid, response: response, data: data, error: error, type: .comms)
         }
         task.resume()
     }
     
     @IBAction func emailSupportButtonPressed(_ sender: Any) {
         
-        LogMethodCall()
+        LogMethodCall(type: .ui)
         
         if MFMailComposeViewController.canSendMail()
         {
@@ -60,35 +60,23 @@ class ViewController: UIViewController, MFMailComposeViewControllerDelegate {
             
             self.present(alertController, animated: true, completion: nil)
             
-            print(LogManager.logString())
-            let htmlString = String(data: htmlLogFile(), encoding: .utf8) ?? ""
-            print(htmlString)
+            LogManager.printLogs()
         }
     }
     
     func configuredMailComposeViewController() -> MFMailComposeViewController {
         let mailer = MFMailComposeViewController()
         mailer.mailComposeDelegate = self;
-
+        
         let appName = Bundle.main.object(forInfoDictionaryKey: "CFBundleName")
         mailer.setSubject("\(appName ?? "") Support Request (iOS)")
         mailer.setToRecipients(["add.support.email@here.com"])
-
+        
         // Convert log to HTML and attach file to email
-        mailer.addAttachmentData(htmlLogFile(), mimeType: "text/html", fileName: "log.html")
-
+        let htmlData = LogManager.htmlData() ?? Data()
+        mailer.addAttachmentData(htmlData, mimeType: "text/html", fileName: "log.html")
+        
         return mailer
-    }
-    
-    /**
-     Converts the log string into HTML data
-     
-     - Returns: A new `Data` object
-     */
-    func htmlLogFile() -> Data {
-        let log = LogManager.logString();
-        let htmlData = try? log.data(from: .init(location: 0, length: log.length), documentAttributes: [.documentType: NSAttributedString.DocumentType.html])
-        return htmlData ?? Data.init()
     }
     
     // MARK: - MFMailComposeViewControllerDelegate

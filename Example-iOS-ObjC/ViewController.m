@@ -9,6 +9,8 @@
 #import "ViewController.h"
 #import <DJLogging/DJLogging.h>
 @import MessageUI;
+#import "DJLogTypeUI.h"
+#import "DJLogTypeComms.h"
 
 @interface ViewController () <MFMailComposeViewControllerDelegate>
 
@@ -18,7 +20,7 @@
 
 - (void)viewDidLoad
 {
-    LogMethodCall
+    LogMethodCallWithType(DJLogTypeUI.shared)
     
     [super viewDidLoad];
     
@@ -27,21 +29,21 @@
 
 - (void)makeAWebRequest
 {
-    NSString *stringUUID = [[NSUUID UUID] UUIDString];
-    LogMethodCallWithUUID(stringUUID)
+    NSUUID *uuid = [NSUUID UUID];
+    LogMethodCallWithUUIDAndType(uuid, DJLogTypeComms.shared)
     
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://venderbase.com"]];
     NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
     NSURLSessionDataTask *task = [session dataTaskWithRequest:request
                                             completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-        LogRequestResponseWithUUID(stringUUID)
+        LogRequestResponseWithUUIDAndType(uuid, DJLogTypeComms.shared)
     }];
     [task resume];
 }
 
 - (IBAction)emailSupportButtonPressed:(id)sender
 {
-    LogMethodCall
+    LogMethodCallWithType(DJLogTypeUI.shared)
     
     if ([MFMailComposeViewController canSendMail])
     {
@@ -54,7 +56,7 @@
         [mailer setToRecipients:toRecipients];
         
         // Fetch the log
-        NSData *logData = [self htmlLogFile];
+        NSData *logData = [LogManager htmlData];
         
         // Attach the HTML log
         [mailer addAttachmentData:logData mimeType:@"text/html" fileName:@"log.html"];
@@ -76,9 +78,14 @@
         
         [self presentViewController:alertController animated:YES completion:nil];
         
-        NSLog(@"%@", [LogManager logString].string);
-        NSString *htmlString = [[NSString alloc] initWithData:[self htmlLogFile] encoding:NSUTF8StringEncoding];
-        NSLog(@"%@", htmlString);
+        [LogManager printLogs];
+        
+        NSData *logData = [LogManager htmlData];
+        NSURL *temporaryDirectoryURL = [NSURL fileURLWithPath:NSTemporaryDirectory() isDirectory:YES];
+        NSURL *fileURL = [temporaryDirectoryURL URLByAppendingPathComponent:@"logs.html"];
+        NSLog(@"%@", fileURL);
+        
+        [logData writeToURL:fileURL atomically:YES];
     }
 }
 
@@ -104,23 +111,6 @@
     }
     // Remove the mail view
     [self dismissViewControllerAnimated:YES completion:nil];
-}
-
-/**
- Converts the log string into HTML data
- 
- - Returns: A new `Data` object
- */
-- (NSData *)htmlLogFile
-{
-    NSAttributedString *log = [LogManager logString];
-    
-    // Save log as HTML file
-    NSData *logData = [log dataFromRange:NSMakeRange(0, log.length)
-                      documentAttributes:@{NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType}
-                                   error:nil];
-    
-    return logData;
 }
 
 @end

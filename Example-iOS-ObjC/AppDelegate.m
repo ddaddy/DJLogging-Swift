@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import <DJLogging/DJLogging.h>
+#import "DJLogTypeUI.h"
 
 @interface AppDelegate ()
 
@@ -19,7 +20,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     LogManager.debugLogsToScreen = YES;
-    LogMethodCall
+    LogMethodCallWithType(DJLogTypeUI.shared)
     
     return YES;
 }

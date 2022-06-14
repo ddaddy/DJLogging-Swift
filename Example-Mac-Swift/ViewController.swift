@@ -12,33 +12,36 @@ import DJLogging
 class ViewController: NSViewController, NSSharingServiceDelegate {
 
     override func viewDidLoad() {
-
-        LogMethodCall()
+        
+        LogManager.debugLogsToScreen = true
+        
+        LogMethodCall(type: .ui)
         
         super.viewDidLoad()
         
-        makeAWebRequest()
+        makeAWebRequest(url: URL(string: "https://venderbase.com")!)
+        makeAWebRequest(url: URL(string: "https://somethingnotvalidxxx.com")!)
     }
     
-    func makeAWebRequest() {
-        let stringUUID = UUID().uuidString
-        LogMethodCallWithUUID(stringUUID)
+    func makeAWebRequest(url: URL) {
+        let uuid = UUID()
+        LogMethodCall(uuid, type: .comms)
         
-        let request = URLRequest(url: URL(string: "https://venderbase.com")!)
+        let request = URLRequest(url: url)
         let session = URLSession(configuration: .default)
         let task = session.dataTask(with: request) { (data, response, error) in
             
-            LogRequestResponse(uuid: stringUUID, response: response, data: data, error: error)
+            LogRequestResponse(uuid: uuid, response: response, data: data, error: error, type: .comms)
         }
         task.resume()
     }
 
     @IBAction func emailSupportButtonPressed(_ sender: Any) {
         
-        LogMethodCall()
+        LogMethodCall(type: .ui)
         
         // Save HTML as temp file
-        let htmlData = htmlLogFile()
+        let htmlData = LogManager.htmlData() ?? Data()
         let tempFile = NSTemporaryDirectory().appending("logs.html")
         print(tempFile)
         
@@ -67,17 +70,6 @@ class ViewController: NSViewController, NSSharingServiceDelegate {
             
             emailSupportWithAttachment(nil)
         }
-    }
-    
-    /**
-     Converts the log string into HTML data
-     
-     - Returns: A new `Data` object
-     */
-    func htmlLogFile() -> Data {
-        let log = LogManager.logString();
-        let htmlData = try? log.data(from: .init(location: 0, length: log.length), documentAttributes: [.documentType: NSAttributedString.DocumentType.html])
-        return htmlData ?? Data.init()
     }
     
     // MARK: - NSSharingService - Email

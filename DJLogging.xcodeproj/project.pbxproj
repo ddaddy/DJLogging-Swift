@@ -30,6 +30,10 @@
 		62D343C023BDFBAB005BEDF3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 62D343BF23BDFBAB005BEDF3 /* Assets.xcassets */; };
 		62D343C323BDFBAB005BEDF3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 62D343C123BDFBAB005BEDF3 /* LaunchScreen.storyboard */; };
 		62D343C623BDFBAB005BEDF3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 62D343C523BDFBAB005BEDF3 /* main.m */; };
+		62D5D39C28589D980059C3FF /* DJLogTypeUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 62D5D39B28589D980059C3FF /* DJLogTypeUI.m */; };
+		62D5D39F28589DE70059C3FF /* DJLogTypeComms.m in Sources */ = {isa = PBXBuildFile; fileRef = 62D5D39E28589DE70059C3FF /* DJLogTypeComms.m */; };
+		62D5D3A428589F430059C3FF /* DJLogTypeUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 62D5D3A028589F430059C3FF /* DJLogTypeUI.m */; };
+		62D5D3A528589F430059C3FF /* DJLogTypeComms.m in Sources */ = {isa = PBXBuildFile; fileRef = 62D5D3A328589F430059C3FF /* DJLogTypeComms.m */; };
 		62E1EBCD23BE41C6006FBA07 /* DJLogging.h in Headers */ = {isa = PBXBuildFile; fileRef = 62E1EBCB23BE41C6006FBA07 /* DJLogging.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		62E1EBD123BE42AB006FBA07 /* LogManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D3439E23BCF2CE005BEDF3 /* LogManager.swift */; };
 		62E1EBD323BE42DB006FBA07 /* SysInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D343A723BD0B22005BEDF3 /* SysInfo.swift */; };
@@ -135,6 +139,14 @@
 		62D343C223BDFBAB005BEDF3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		62D343C423BDFBAB005BEDF3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		62D343C523BDFBAB005BEDF3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		62D5D39A28589D980059C3FF /* DJLogTypeUI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DJLogTypeUI.h; sourceTree = "<group>"; };
+		62D5D39B28589D980059C3FF /* DJLogTypeUI.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DJLogTypeUI.m; sourceTree = "<group>"; };
+		62D5D39D28589DE70059C3FF /* DJLogTypeComms.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DJLogTypeComms.h; sourceTree = "<group>"; };
+		62D5D39E28589DE70059C3FF /* DJLogTypeComms.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DJLogTypeComms.m; sourceTree = "<group>"; };
+		62D5D3A028589F430059C3FF /* DJLogTypeUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DJLogTypeUI.m; path = "Example-Mac-ObjC/DJLogTypeUI.m"; sourceTree = SOURCE_ROOT; };
+		62D5D3A128589F430059C3FF /* DJLogTypeComms.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DJLogTypeComms.h; path = "Example-Mac-ObjC/DJLogTypeComms.h"; sourceTree = SOURCE_ROOT; };
+		62D5D3A228589F430059C3FF /* DJLogTypeUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DJLogTypeUI.h; path = "Example-Mac-ObjC/DJLogTypeUI.h"; sourceTree = SOURCE_ROOT; };
+		62D5D3A328589F430059C3FF /* DJLogTypeComms.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DJLogTypeComms.m; path = "Example-Mac-ObjC/DJLogTypeComms.m"; sourceTree = SOURCE_ROOT; };
 		62E1EBC923BE41C6006FBA07 /* DJLogging.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DJLogging.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		62E1EBCB23BE41C6006FBA07 /* DJLogging.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DJLogging.h; sourceTree = "<group>"; };
 		62E1EBCC23BE41C6006FBA07 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -295,6 +307,10 @@
 				62D343B423BDFBA9005BEDF3 /* AppDelegate.m */,
 				62D343B923BDFBA9005BEDF3 /* ViewController.h */,
 				62D343BA23BDFBA9005BEDF3 /* ViewController.m */,
+				62D5D3A128589F430059C3FF /* DJLogTypeComms.h */,
+				62D5D3A328589F430059C3FF /* DJLogTypeComms.m */,
+				62D5D3A228589F430059C3FF /* DJLogTypeUI.h */,
+				62D5D3A028589F430059C3FF /* DJLogTypeUI.m */,
 				62D343BC23BDFBA9005BEDF3 /* Main.storyboard */,
 				62D343BF23BDFBAB005BEDF3 /* Assets.xcassets */,
 				62D343C123BDFBAB005BEDF3 /* LaunchScreen.storyboard */,
@@ -333,6 +349,10 @@
 				62E1EBFA23BE6050006FBA07 /* AppDelegate.m */,
 				62E1EBFC23BE6050006FBA07 /* ViewController.h */,
 				62E1EBFD23BE6050006FBA07 /* ViewController.m */,
+				62D5D39A28589D980059C3FF /* DJLogTypeUI.h */,
+				62D5D39B28589D980059C3FF /* DJLogTypeUI.m */,
+				62D5D39D28589DE70059C3FF /* DJLogTypeComms.h */,
+				62D5D39E28589DE70059C3FF /* DJLogTypeComms.m */,
 				628350E723BF7A12009334A6 /* Menu Bar */,
 				62E1EBFF23BE6054006FBA07 /* Assets.xcassets */,
 				62E1EC0123BE6054006FBA07 /* Main.storyboard */,
@@ -651,9 +671,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				62D5D3A428589F430059C3FF /* DJLogTypeUI.m in Sources */,
 				62D343BB23BDFBA9005BEDF3 /* ViewController.m in Sources */,
 				62D343B523BDFBA9005BEDF3 /* AppDelegate.m in Sources */,
 				62D343C623BDFBAB005BEDF3 /* main.m in Sources */,
+				62D5D3A528589F430059C3FF /* DJLogTypeComms.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -683,6 +705,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				62D5D39F28589DE70059C3FF /* DJLogTypeComms.m in Sources */,
+				62D5D39C28589D980059C3FF /* DJLogTypeUI.m in Sources */,
 				628350EA23BF7A12009334A6 /* SupportMenuController.m in Sources */,
 				62E1EBFE23BE6050006FBA07 /* ViewController.m in Sources */,
 				62E1EC0623BE6054006FBA07 /* main.m in Sources */,

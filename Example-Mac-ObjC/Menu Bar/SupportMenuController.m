@@ -37,11 +37,9 @@
 }
 
 - (void)emailSupportWithLogsPressed:(id)sender
-{
-    NSAttributedString *log = [LogManager logString];
-    NSData *logData = [log dataFromRange:NSMakeRange(0, log.length)
-                      documentAttributes:@{NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType}
-                                   error:nil];
+{   
+    // Save log as HTML file
+    NSData *logData = [LogManager htmlData];
     
     NSURL *tempFile = [NSURL fileURLWithPath:[NSTemporaryDirectory() stringByAppendingFormat:@"logs.html"]];
     NSLog(@"%@", tempFile);

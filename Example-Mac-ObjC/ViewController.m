@@ -8,6 +8,8 @@
 
 #import "ViewController.h"
 #import <DJLogging/DJLogging.h>
+#import "DJLogTypeUI.h"
+#import "DJLogTypeComms.h"
 
 @interface ViewController () <NSSharingServiceDelegate>
 
@@ -19,7 +21,7 @@
 {
     // This method is called before AppDelegate's applicationDidFinishLaunching
     LogManager.debugLogsToScreen = YES;
-    LogMethodCall
+    LogMethodCallWithType(DJLogTypeUI.shared)
     
     [super viewDidLoad];
     
@@ -28,14 +30,14 @@
 
 - (void)makeAWebRequest
 {
-    NSString *stringUUID = [[NSUUID UUID] UUIDString];
-    LogMethodCallWithUUID(stringUUID)
+    NSUUID *uuid = [NSUUID UUID];
+    LogMethodCallWithUUIDAndType(uuid, DJLogTypeComms.shared)
     
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://venderbase.com"]];
     NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
     NSURLSessionDataTask *task = [session dataTaskWithRequest:request
                                             completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-        LogRequestResponseWithUUID(stringUUID)
+        LogRequestResponseWithUUIDAndType(uuid, DJLogTypeComms.shared)
     }];
     [task resume];
 }
@@ -45,7 +47,7 @@
     LogMethodCall
     
     // Save HTML as temp file
-    NSData *htmlData = [self htmlLogFile];
+    NSData *htmlData = [LogManager htmlData];
     NSURL *tempFile = [NSURL fileURLWithPath:[NSTemporaryDirectory() stringByAppendingFormat:@"logs.html"]];
     NSLog(@"%@", tempFile);
     
@@ -70,23 +72,6 @@
         
         [self emailSupportWithAttachment:nil];
     }
-}
-
-/**
- Converts the log string into HTML data
- 
- - Returns: A new `Data` object
- */
-- (NSData *)htmlLogFile
-{
-    NSAttributedString *log = [LogManager logString];
-    
-    // Save log as HTML file
-    NSData *logData = [log dataFromRange:NSMakeRange(0, log.length)
-                      documentAttributes:@{NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType}
-                                   error:nil];
-    
-    return logData;
 }
 
 #pragma mark - NSSharingService - Email

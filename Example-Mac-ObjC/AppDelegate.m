@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import <DJLogging/DJLogging.h>
+#import "DJLogTypeUI.h"
 
 @interface AppDelegate ()
 
@@ -18,7 +19,7 @@
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
     LogManager.debugLogsToScreen = YES;
-    LogMethodCall
+    LogMethodCallWithType(DJLogTypeUI.shared)
 }
 
 - (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender

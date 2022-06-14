@@ -11,19 +11,36 @@ import DJLogging
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
-
-
-
+    
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         
         LogManager.debugLogsToScreen = true
-        LogMethodCall()
+        LogMethodCall(type: .ui)
     }
     
     func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
         return true
     }
-
-
 }
 
+class DJLogTypeComms: DJLogType {
+    static var shared: DJLogType = DJLogTypeComms()
+    var id: UUID = UUID()
+    var name: String = "comms"
+    var colour: DJColor = DJColours.orange
+}
+
+extension DJLogType where Self == DJLogTypeComms {
+    static var comms: DJLogType { DJLogTypeComms.shared }
+}
+
+class DJLogTypeUI: DJLogType {
+    static var shared: DJLogType = DJLogTypeUI()
+    var id: UUID = UUID()
+    var name: String = "ui"
+    var colour: DJColor = DJColours.blue
+}
+
+extension DJLogType where Self == DJLogTypeUI {
+    static var ui: DJLogType { DJLogTypeUI.shared }
+}

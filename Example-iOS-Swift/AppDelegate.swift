@@ -17,11 +17,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         LogManager.debugLogsToScreen = true
-        LogMethodCall()
+        LogMethodCall(type: .ui)
         
         return true
     }
-
-
 }
 
+class DJLogTypeComms: DJLogType {
+    static var shared: DJLogType = DJLogTypeComms()
+    var id: UUID = UUID()
+    var name: String = "comms"
+    var colour: DJColor = DJColours.orange
+}
+
+extension DJLogType where Self == DJLogTypeComms {
+    static var comms: DJLogType { DJLogTypeComms.shared }
+}
+
+class DJLogTypeUI: DJLogType {
+    static var shared: DJLogType = DJLogTypeUI()
+    var id: UUID = UUID()
+    var name: String = "ui"
+    var colour: DJColor = DJColours.blue
+}
+
+extension DJLogType where Self == DJLogTypeUI {
+    static var ui: DJLogType { DJLogTypeUI.shared }
+}
