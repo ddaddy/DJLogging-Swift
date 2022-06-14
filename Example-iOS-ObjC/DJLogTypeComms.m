@@ -1,16 +1,16 @@
 //
-//  DJLogTypeUI.m
+//  DJLogTypeComms.m
 //  Example-Mac-ObjC
 //
 //  Created by Darren Jones on 14/06/2022.
 //  Copyright © 2022 Darren Jones. All rights reserved.
 //
 
-#import "DJLogTypeUI.h"
+#import "DJLogTypeComms.h"
 
-@implementation DJLogTypeUI
+@implementation DJLogTypeComms
 
-static DJLogTypeUI *_sharedInstance = nil;
+static DJLogTypeComms *_sharedInstance = nil;
 static NSUUID *_uuid = nil;
 
 + (id<DJLogType> _Nonnull)shared {
@@ -31,7 +31,7 @@ static NSUUID *_uuid = nil;
     return _uuid;
 }
 
-- (NSString *)name { return @"UI"; }
-- (NSColor *)colour { return [DJColours blue]; }
+- (NSString *)name { return @"comms"; }
+- (UIColor *)colour { return [DJColours orange]; }
 
 @end

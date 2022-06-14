@@ -32,6 +32,6 @@ static NSUUID *_uuid = nil;
 }
 
 - (NSString *)name { return @"comms"; }
-- (UIColor *)colour { return [DJColours orange]; }
+- (NSColor *)colour { return [DJColours orange]; }
 
 @end
