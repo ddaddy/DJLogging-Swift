@@ -13,30 +13,46 @@ import UIKit
 
 #endif
 
-public func LogMethodCall(function: String = #function, file: String = #file, line: Int = #line) {
-    LogMethodCallWithUUID(nil, function: function, file: file, line: line)
-}
-public func LogMethodCall(function: String = #function, file: String = #file, line: Int = #line, _ param: String?) {
-    LogMethodCallWithUUID(nil, function: function, file: file, line: line, param: param ?? "")
-}
-public func LogMethodCall(function: String = #function, file: String = #file, line: Int = #line, _ param: Double?) {
-    LogMethodCallWithUUID(nil, function: function, file: file, line: line, param: param != nil ? String(param!) : "")
-}
-public func LogMethodCall(function: String = #function, file: String = #file, line: Int = #line, _ param: Int?) {
-    LogMethodCallWithUUID(nil, function: function, file: file, line: line, param: param != nil ? String(param!) : "")
+public func LogMethodCall(function: String = #function, file: String = #file, line: Int = #line, type: DJLogType = .standard) {
+    LogMethodCall(nil, function: function, file: file, line: line, type: type)
 }
 
-public func LogMethodCallWithUUID(_ uuid: String?, function: String = #function, file: String = #file, line: Int = #line) {
-    let lastPathComponent = URL.init(fileURLWithPath: file).lastPathComponent
-    LogManager.logString("\(function) file:\(lastPathComponent) line:\(line)", uuid: uuid)
-}
-public func LogMethodCallWithUUID(_ uuid: String?, function: String = #function, file: String = #file, line: Int = #line, param: String) {
-    let lastPathComponent = URL.init(fileURLWithPath: file).lastPathComponent
-    LogManager.logString("\(function) file:\(lastPathComponent) line:\(line) param:\(param)", uuid: uuid)
+public func LogMethodCall(function: String = #function, file: String = #file, line: Int = #line, _ param: String? = nil, type: DJLogType = .standard) {
+    if let param = param {
+        LogMethodCall(nil, function: function, file: file, line: line, logs: [param], type: type)
+    } else {
+        LogMethodCall(nil, function: function, file: file, line: line, type: type)
+    }
 }
 
-public func LogRequestResponse(uuid: String?, response: URLResponse?, data: Data?, error: Error?) {
-    LogManager.logRequestResponse(response, data: data, error: error as NSError?, uuid: uuid)
+public func LogMethodCall(function: String = #function, file: String = #file, line: Int = #line, _ param: Double? = nil, type: DJLogType = .standard) {
+    if let param = param {
+        LogMethodCall(nil, function: function, file: file, line: line, logs: [String(param)], type: type)
+    } else {
+        LogMethodCall(nil, function: function, file: file, line: line, type: type)
+    }
+}
+
+public func LogMethodCall(function: String = #function, file: String = #file, line: Int = #line, _ param: Int? = nil, type: DJLogType = .standard) {
+    if let param = param {
+        LogMethodCall(nil, function: function, file: file, line: line, logs: [String(param)], type: type)
+    } else {
+        LogMethodCall(nil, function: function, file: file, line: line, type: type)
+    }
+}
+
+public func LogMethodCall(_ uuid: UUID?, function: String = #function, file: String = #file, line: Int = #line, type: DJLogType = .standard) {
+    let lastPathComponent = URL.init(fileURLWithPath: file).lastPathComponent
+    LogManager.log("\(function) file:\(lastPathComponent) line:\(line)", log: nil, uuid: uuid, type: type)
+}
+
+public func LogMethodCall(_ uuid: UUID?, function: String = #function, file: String = #file, line: Int = #line, logs: [String], type: DJLogType = .standard) {
+    let lastPathComponent = URL.init(fileURLWithPath: file).lastPathComponent
+    LogManager.log("\(function) file:\(lastPathComponent) line:\(line)", log: nil, uuid: uuid, type: type)
+}
+
+public func LogRequestResponse(uuid: UUID?, response: URLResponse?, data: Data?, error: Error?, type: DJLogType = .standard) {
+    LogManager.logRequestResponse(response, data: data, error: error as NSError?, uuid: uuid, type: type)
 }
 
 @objc(LogManager)
@@ -51,117 +67,68 @@ public class LogManager: NSObject {
     
     /**
      Override to change the maximum log length.
-     Default value is `3000000`
+     Default value is `1000`
      */
-    @objc public static var maxLogLength = 3000000
+    @objc public static var maxLogLength = 1000
     
     // MARK: - Public methods
+    public static func logString(_ title: String, uuid: UUID? = nil, type: DJLogType = .standard) {
+        log(title, log: nil, uuid: uuid, type: type)
+    }
+    
+    @objc(logTitle:log:uuid:type:)
+    public static func log(_ title: String, log: String?, uuid: UUID?, type: DJLogType = .standard) {
+        
+        sharedInstance.log(title, log: log, uuid: uuid, type: type)
+    }
+    
+    public static func log(_ title: String, logs: [String], uuid: UUID?, type: DJLogType = .standard) {
+        
+        sharedInstance.log(title, logs: logs, uuid: uuid, type: type)
+    }
+    
+    @objc
+    public static func logRequestResponse(_ response: URLResponse?, data: Data?, error: NSError?, uuid: UUID?, type: DJLogType = .standard) {
+        
+        sharedInstance.logRequestResponse(response, data: data, error: error, uuid: uuid, type: type)
+    }
     
     /**
+     Generates a complete HTML string of the logs
+     
      Automatically appends app/system information to the end of the log
      
-     - Returns: `NSAttributedString` of the entire log
+     - Returns: `String` of the entire log in html format
      */
-    @objc public static func logString() -> NSAttributedString {
+    @objc public static func htmlString() -> String {
         
-        // Get the current log
-        let currentLog = sharedInstance._logString!.mutableCopy() as! NSMutableAttributedString
+        // Add the app info to logs
+        var currentLogs = sharedInstance._logs
+        currentLogs.append(DJLogLine(uuid: nil, title: "LogManager End", logs: sharedInstance.appInfo))
         
-        // Add the app version to end of log
-        let appName = Bundle.main.object(forInfoDictionaryKey: "CFBundleName") ?? ""
-        let appVersion = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") ?? ""
-        let appBuild = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") ?? ""
-        let attributes: [NSAttributedString.Key: Any] = [
-            .foregroundColor: UniversalColor.myBlackColour
-        ]
-        currentLog.append(NSAttributedString(string: "Appname: \(appName) Version: \(appVersion) Build: \(appBuild)\n", attributes: attributes))
-        currentLog.append(NSAttributedString(string: "SysInfo: \(SysInfo.sysInfo())\n"))
-        currentLog.append(NSAttributedString(string: "Time/Date: \(Date().localFormat())\n"))
-        currentLog.append(NSAttributedString(string: "Timezone: \(TimeZone.current.description)\n"))
-        
-        return currentLog
+        return DJHTML.html(from: currentLogs)
     }
     
-    @objc public static func logString(_ string:String, uuid:String?) {
+    /**
+     Generates a complete HTML string of the logs and converts it to `Data` ready to be emailed
+     
+     Automatically appends app/system information to the end of the log
+     
+     - Returns: `Data` of the entire log in html format
+     */
+    @objc public static func htmlData() -> Data? {
         
-        sharedInstance.serialQueue.async {
-            
-            sharedInstance.checkLogLength()
-            sharedInstance.logDate()
-            sharedInstance.logTab()
-            sharedInstance.logUUID(uuid: uuid)
-            sharedInstance.logTab()
-            sharedInstance.logString(string: string + "\n")
-            
-            if debugLogsToScreen
-            {
-                print("****LogManager**** \(uuid ?? "NO_UUID") \(string)")
-            }
-        }
+        let log = LogManager.htmlString();
+        return log.data(using: .utf8, allowLossyConversion: true)
     }
     
-    @objc public static func logString(_ string:String, data:Data?, uuid:String?) {
+    @objc public static func printLogs() {
         
-        sharedInstance.serialQueue.async {
-            
-            sharedInstance.checkLogLength()
-            sharedInstance.logDate()
-            sharedInstance.logTab()
-            sharedInstance.logUUID(uuid: uuid)
-            sharedInstance.logTab()
-            sharedInstance.logString(string: string, data: data)
-            
-            if debugLogsToScreen
-            {
-                var _data = data
-                if _data == nil
-                {
-                    _data = Data.init()
-                }
-                let dataMap = _data!.map { String(format: "%02x", $0)}.joined()
-                print("****LogManager**** \(uuid ?? "NO_UUID") \(string) data:\(dataMap)")
-            }
-        }
-    }
-    
-    @objc public static func logRequestResponse(_ response:URLResponse?, data:Data?, error:NSError?, uuid:String?) {
-        
-        sharedInstance.serialQueue.async {
-            
-            var underlyingError:NSError? = nil
-            if error != nil
-            {
-                if (error!.userInfo[NSUnderlyingErrorKey] != nil)
-                {
-                    underlyingError = error!.userInfo[NSUnderlyingErrorKey] as? NSError
-                    print("underlyingError: \(underlyingError!)")
-                }
-            }
-            
-            sharedInstance.checkLogLength()
-            sharedInstance.logDate()
-            sharedInstance.logTab()
-            sharedInstance.logUUID(uuid: uuid)
-            sharedInstance.logTab()
-            
-            let string = """
-                Finished with status code: \(response?.getStatusCode() ?? 0)
-                Response: \(response?.description ?? "")
-                Error: \(error?.description ?? "")
-                """ + (underlyingError != nil ? "\nUnderlyingError ":"")
-                + (underlyingError != nil ? underlyingError!.description:"")
-            
-            sharedInstance.logString(string: string, data: data)
-            
-            if debugLogsToScreen
-            {
-                var _data = data
-                if _data == nil
-                {
-                    _data = Data.init()
-                }
-                let dataMap = _data!.map { String(format: "%02x", $0)}.joined()
-                print("****LogManager**** \(uuid ?? "NO_UUID") \(string) data:\(dataMap)")
+        let logs = sharedInstance._logs
+        logs.forEach { log in
+            print(log.title)
+            if let logs = log.logs {
+                print(logs.joined(separator: "\n"))
             }
         }
     }
@@ -169,117 +136,130 @@ public class LogManager: NSObject {
     @objc public static func clearLog() {
         
         sharedInstance.serialQueue.async {
-            
-            sharedInstance._logString = NSMutableAttributedString.init(string: "")
+            sharedInstance._logs = []
         }
     }
     
-    // MARK: Private Properties
-    
+    // MARK: - Private Properties
     private static let sharedInstance = LogManager()
-    private var _logString: NSMutableAttributedString?
+    private var _logs: [DJLogLine] = []
     private let serialQueue = DispatchQueue(label: "DJLoggingSerialQueue")
     
     // MARK: - Init
-
-    // Initialization
     private override init() {
-        _logString = NSMutableAttributedString.init(string: "")
-        
         super.init()
 
-        // Add the app version to logs
-        let appName = Bundle.main.object(forInfoDictionaryKey: "CFBundleName") ?? ""
-        let appVersion = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") ?? ""
-        let appBuild = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") ?? ""
-        logString(string: "LogManager Start\n")
-        logString(string: "Appname: \(appName) Version: \(appVersion) Build: \(appBuild)\n")
-        logString(string: "SysInfo: \(SysInfo.sysInfo())\n")
-        logString(string: "Time/Date: \(Date().localFormat())\n")
-        logString(string: "Timezone: \(TimeZone.current.description)\n")
+        // Add the app info to logs
+        log("LogManager Start", logs: appInfo, uuid: nil)
     }
     
     // MARK: - Internal
+    private var appInfo: [String] {
+        let appName = Bundle.main.object(forInfoDictionaryKey: "CFBundleName") ?? ""
+        let appVersion = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") ?? ""
+        let appBuild = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") ?? ""
+        return ["Appname: \(appName) Version: \(appVersion) Build: \(appBuild)",
+                "SysInfo: \(SysInfo.sysInfo())",
+                "Time/Date: \(Date().localFormat())",
+                "Timezone: \(TimeZone.current.description)",
+                "Memory Use: \(SysInfo.memoryUse())"]
+    }
     
-    private func logString(string:String, colour:UniversalColor = .myBlackColour) {
+    private func log(_ title: String, code: Int? = nil, log: String?, uuid: UUID?, type: DJLogType = .standard) {
+        serialQueue.async {
+            let logLine = DJLogLine(uuid: uuid, code: code, title: title, log: log, type: type)
+            self._logs.append(logLine)
+            
+            self.checkLogLength()
+            
+            if Self.debugLogsToScreen == true {
+                print("****LogManager**** \(uuid?.uuidString ?? "") \t\(title) \t\(log ?? "")")
+            }
+        }
+    }
+    
+    private func log(_ title: String, code: Int? = nil, logs: [String], uuid: UUID?, type: DJLogType = .standard) {
+        serialQueue.async {
+            let logLine = DJLogLine(uuid: uuid, code: code, title: title, logs: logs, type: type)
+            self._logs.append(logLine)
+            
+            self.checkLogLength()
+            
+            if Self.debugLogsToScreen == true {
+                print("****LogManager**** \(uuid?.uuidString ?? "") \t\(title) \n\(logs)")
+            }
+        }
+    }
+    
+    private func logRequestResponse(_ response: URLResponse?, data: Data?, error: NSError?, uuid: UUID?, type: DJLogType = .standard) {
         
-        let attributes: [NSAttributedString.Key: Any] = [
-            .foregroundColor: colour
+        var underlyingError: NSError? = nil
+        if let error = error {
+            if (error.userInfo[NSUnderlyingErrorKey] != nil) {
+                underlyingError = error.userInfo[NSUnderlyingErrorKey] as? NSError
+            }
+        }
+        
+        let logs = [
+            "Response: \(response?.description ?? "")",
+            "Error: \(error?.description ?? "")",
+            "UnderlyingError: \(underlyingError?.description ?? "")",
+            "Data: \(String(describing: data))",
+            "Decoded: \(data?.string ?? "")"
         ]
-        let newString = NSAttributedString(string: string, attributes: attributes)
-        _logString?.append(newString)
-    }
-    
-    private func logString(string:String, data:Data?) {
         
-        logString(string: string)
-        
-        if data != nil
-        {
-            let converted = String(data: data!, encoding: .utf8)
-            if converted == nil
-            {
-                // Couldn't convert data using UTF8 (Strange!) So try another method
-                let _converted = String(data: data!, encoding: .isoLatin1)
-                if _converted == nil
-                {
-                    // Couldn't convert data using NSISOLatin (Strange!) So try another method
-                    let __converted = String(data: data!, encoding: .ascii)
-                    if __converted == nil
-                    {
-                        logString(string: "\t CANNOT CONVERT DATA TO STRING! \t\(data!)\n", colour: .myDataColour)
-                    }
-                    else
-                    {
-                        logString(string: "\t NSASCIIStringEncoding \t\(__converted!)\n", colour: .myDataColour)
-                    }
-                }
-                else
-                {
-                    logString(string: "\t NSISOLatin1StringEncoding \t\(_converted!)\n", colour: .myDataColour)
-                }
+        var title = response?.url?.absoluteString
+        if let error = error as? URLError {
+            
+            var reason = ""
+            switch error.code {
+            case .timedOut:
+                reason = "timeout"
+            case .cancelled:
+                reason = "cancelled"
+            case .badURL:
+                reason = "badURL"
+            case .networkConnectionLost:
+                reason = "networkConnectionLost"
+            case .notConnectedToInternet:
+                reason = "notConnectedToInternet"
+            case .cannotParseResponse:
+                reason = "cannotParseResponse"
+            case .secureConnectionFailed:
+                reason = "secureConnectionFailed"
+            default:
+                reason = "\(error.code.rawValue)"
             }
-            else
-            {
-                logString(string: "\t NSUTF8StringEncoding \t\(converted!)\n", colour: .myDataColour)
-            }
-        }
-        else
-        {
-            logString(string: "\tnil data\n", colour: .myDataColour)
-        }
-    }
-    
-    private func logTab() {
-        logString(string: "\t")
-    }
-    
-    private func logDate() {
-        logString(string: "\(Date())", colour: .myBlueColour)
-    }
-    
-    private func logUUID(uuid: String!) {
-        var _uuid = uuid
-        if _uuid == nil
-        {
-            _uuid = "NO_UUID"
+            
+            title = "⛔️ Error❗️ \(reason) \(error.failureURLString ?? "")"
         }
         
-        logString(string: "\(_uuid!)", colour: .myUUIDColour)
+        var code = response?.getStatusCode()
+        if code == nil,
+           let error = error {
+            code = error.code
+        } else {
+            if code == 200 {
+                title = "✅ \(title ?? "")"
+            } else {
+                title = "⚠️ \(title ?? "")"
+            }
+        }
+        
+        log(title ?? "", code: code, logs: logs, uuid: uuid, type: type)
     }
     
     private func checkLogLength() {
-        if _logString!.length > LogManager.maxLogLength
-        {
-            print("Log too big: \(_logString!.length)")
-            _logString!.deleteCharacters(in: NSMakeRange(0, _logString!.length - LogManager.maxLogLength))
-            _logString!.insert(NSAttributedString.init(string: "... LOG TRIMMED\n", attributes: [.foregroundColor: UniversalColor.myWarningColour]), at: 0)
-            print("New length: \(_logString!.length)")
+        
+        if _logs.count > Self.maxLogLength {
+            print("Log too big: \(_logs.count) so trimming.")
+            _logs.remove(at: 0)
         }
     }
     
 }
 
+// MARK: - Helpers
 fileprivate extension URLResponse {
 
     func getStatusCode() -> Int? {
@@ -297,5 +277,23 @@ fileprivate extension Date {
         formatter.dateStyle = .full
         formatter.timeStyle = .full
         return formatter.string(from: self)
+    }
+}
+
+fileprivate extension Data {
+    
+    var string: String {
+        
+        if let converted = String(data: self, encoding: .utf8) {
+            return converted
+        } else if let converted = String(data: self, encoding: .isoLatin1) {
+            // Couldn't convert data using UTF8 (Strange!) So try another method
+            return "NSISOLatin1StringEncoding \t\(converted)"
+        } else if let converted = String(data: self, encoding: .ascii) {
+            // Couldn't convert data using NSISOLatin (Strange!) So try another method
+            return "NSASCIIStringEncoding \t\(converted)"
+        } else {
+            return "CANNOT CONVERT DATA TO STRING! \t\(self)"
+        }
     }
 }

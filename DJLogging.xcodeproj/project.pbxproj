@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		620EA70E28571A7C002502E7 /* DJLogType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 620EA70D28571A7C002502E7 /* DJLogType.swift */; };
+		620EA70F28571A7C002502E7 /* DJLogType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 620EA70D28571A7C002502E7 /* DJLogType.swift */; };
+		620EA711285724BA002502E7 /* DJColours.swift in Sources */ = {isa = PBXBuildFile; fileRef = 620EA710285724BA002502E7 /* DJColours.swift */; };
+		620EA712285724BA002502E7 /* DJColours.swift in Sources */ = {isa = PBXBuildFile; fileRef = 620EA710285724BA002502E7 /* DJColours.swift */; };
+		627BE9892854DD06005F6627 /* DJHTML.swift in Sources */ = {isa = PBXBuildFile; fileRef = 627BE9882854DD06005F6627 /* DJHTML.swift */; };
+		627BE98A2854DD06005F6627 /* DJHTML.swift in Sources */ = {isa = PBXBuildFile; fileRef = 627BE9882854DD06005F6627 /* DJHTML.swift */; };
+		627BE98C2854E211005F6627 /* DJLogLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 627BE98B2854E211005F6627 /* DJLogLine.swift */; };
+		627BE98D2854E211005F6627 /* DJLogLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 627BE98B2854E211005F6627 /* DJLogLine.swift */; };
 		628350EA23BF7A12009334A6 /* SupportMenuController.m in Sources */ = {isa = PBXBuildFile; fileRef = 628350E823BF7A12009334A6 /* SupportMenuController.m */; };
 		62D3437D23BCC6CF005BEDF3 /* DJLogging.h in Headers */ = {isa = PBXBuildFile; fileRef = 62D3437B23BCC6CF005BEDF3 /* DJLogging.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		62D3438A23BCC83D005BEDF3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D3438923BCC83D005BEDF3 /* AppDelegate.swift */; };
@@ -14,7 +22,6 @@
 		62D3439123BCC83D005BEDF3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 62D3438F23BCC83D005BEDF3 /* Main.storyboard */; };
 		62D3439323BCC843005BEDF3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 62D3439223BCC843005BEDF3 /* Assets.xcassets */; };
 		62D3439623BCC843005BEDF3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 62D3439423BCC843005BEDF3 /* LaunchScreen.storyboard */; };
-		62D343A523BCFDC4005BEDF3 /* Colours.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D343A423BCFDC4005BEDF3 /* Colours.swift */; };
 		62D343A823BD0B22005BEDF3 /* SysInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D343A723BD0B22005BEDF3 /* SysInfo.swift */; };
 		62D343AA23BD5649005BEDF3 /* LogManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D3439E23BCF2CE005BEDF3 /* LogManager.swift */; };
 		62D343B523BDFBA9005BEDF3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 62D343B423BDFBA9005BEDF3 /* AppDelegate.m */; };
@@ -25,7 +32,6 @@
 		62D343C623BDFBAB005BEDF3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 62D343C523BDFBAB005BEDF3 /* main.m */; };
 		62E1EBCD23BE41C6006FBA07 /* DJLogging.h in Headers */ = {isa = PBXBuildFile; fileRef = 62E1EBCB23BE41C6006FBA07 /* DJLogging.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		62E1EBD123BE42AB006FBA07 /* LogManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D3439E23BCF2CE005BEDF3 /* LogManager.swift */; };
-		62E1EBD223BE42B2006FBA07 /* Colours.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D343A423BCFDC4005BEDF3 /* Colours.swift */; };
 		62E1EBD323BE42DB006FBA07 /* SysInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D343A723BD0B22005BEDF3 /* SysInfo.swift */; };
 		62E1EBDB23BE4F60006FBA07 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E1EBDA23BE4F60006FBA07 /* AppDelegate.swift */; };
 		62E1EBDD23BE4F60006FBA07 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E1EBDC23BE4F60006FBA07 /* ViewController.swift */; };
@@ -99,6 +105,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		620EA70D28571A7C002502E7 /* DJLogType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DJLogType.swift; sourceTree = "<group>"; };
+		620EA710285724BA002502E7 /* DJColours.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DJColours.swift; sourceTree = "<group>"; };
+		627BE9882854DD06005F6627 /* DJHTML.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DJHTML.swift; sourceTree = "<group>"; };
+		627BE98B2854E211005F6627 /* DJLogLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DJLogLine.swift; sourceTree = "<group>"; };
 		628350E823BF7A12009334A6 /* SupportMenuController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SupportMenuController.m; sourceTree = "<group>"; };
 		628350E923BF7A12009334A6 /* SupportMenuController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SupportMenuController.h; sourceTree = "<group>"; };
 		628886A025D6CCEB0061F651 /* Example-iOS-Swift.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Example-iOS-Swift.entitlements"; sourceTree = "<group>"; };
@@ -114,7 +124,6 @@
 		62D3439523BCC843005BEDF3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		62D3439723BCC843005BEDF3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		62D3439E23BCF2CE005BEDF3 /* LogManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogManager.swift; sourceTree = "<group>"; };
-		62D343A423BCFDC4005BEDF3 /* Colours.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colours.swift; sourceTree = "<group>"; };
 		62D343A723BD0B22005BEDF3 /* SysInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SysInfo.swift; sourceTree = "<group>"; };
 		62D343B123BDFBA9005BEDF3 /* Example-iOS-ObjC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Example-iOS-ObjC.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		62D343B323BDFBA9005BEDF3 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -262,8 +271,11 @@
 			isa = PBXGroup;
 			children = (
 				62D3439E23BCF2CE005BEDF3 /* LogManager.swift */,
-				62D343A423BCFDC4005BEDF3 /* Colours.swift */,
+				620EA70D28571A7C002502E7 /* DJLogType.swift */,
+				627BE98B2854E211005F6627 /* DJLogLine.swift */,
+				627BE9882854DD06005F6627 /* DJHTML.swift */,
 				62D343A723BD0B22005BEDF3 /* SysInfo.swift */,
+				620EA710285724BA002502E7 /* DJColours.swift */,
 			);
 			path = Logging;
 			sourceTree = "<group>";
@@ -358,6 +370,7 @@
 			buildConfigurationList = 62D3438023BCC6CF005BEDF3 /* Build configuration list for PBXNativeTarget "DJLogging-iOS" */;
 			buildPhases = (
 				62D3437323BCC6CE005BEDF3 /* Headers */,
+				627BE98F2855D217005F6627 /* Check TODO, FIXME & XXX */,
 				62D3437423BCC6CE005BEDF3 /* Sources */,
 				62D3437523BCC6CE005BEDF3 /* Frameworks */,
 				62D3437623BCC6CE005BEDF3 /* Resources */,
@@ -376,7 +389,6 @@
 			buildConfigurationList = 62D3439823BCC843005BEDF3 /* Build configuration list for PBXNativeTarget "Example-iOS-Swift" */;
 			buildPhases = (
 				62D3438323BCC83D005BEDF3 /* Sources */,
-				62D3439B23BCDB2A005BEDF3 /* Check TODO, FIXME & XXX */,
 				62D3438423BCC83D005BEDF3 /* Frameworks */,
 				62D3438523BCC83D005BEDF3 /* Resources */,
 				62E1EBF223BE59F6006FBA07 /* Embed Frameworks */,
@@ -413,6 +425,7 @@
 			buildConfigurationList = 62E1EBCE23BE41C6006FBA07 /* Build configuration list for PBXNativeTarget "DJLogging-MacOS" */;
 			buildPhases = (
 				62E1EBC423BE41C6006FBA07 /* Headers */,
+				627BE9902855D233005F6627 /* Check TODO, FIXME & XXX */,
 				62E1EBC523BE41C6006FBA07 /* Sources */,
 				62E1EBC623BE41C6006FBA07 /* Frameworks */,
 				62E1EBC723BE41C6006FBA07 /* Resources */,
@@ -573,7 +586,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		62D3439B23BCDB2A005BEDF3 /* Check TODO, FIXME & XXX */ = {
+		627BE98F2855D217005F6627 /* Check TODO, FIXME & XXX */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -589,7 +602,25 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "TAGS=\"TODO:|FIXME:|XXX:|\\?\\?\\?:|\\!\\!\\!:\"\nERRORTAG=\"ERROR:\"\nfind \"${SRCROOT}\" \\( -name \"*.h\" -or -name \"*.m\" -or -name \"*.swift\" \\) -not -path \"${SRCROOT}/Carthage/*\" -print0 | xargs -0 egrep --with-filename --line-number --only-matching \"($TAGS).*\\$|($ERRORTAG).*\\$\" | perl -p -e \"s/($TAGS)/ warning: \\$1/\" | perl -p -e \"s/($ERRORTAG)/ error: \\$1/\"\n";
+			shellScript = "TAGS=\"TODO:|FIXME:|XXX:|\\?\\?\\?:|\\!\\!\\!:\"\nERRORTAG=\"ERROR: \"\nfind \"${SRCROOT}\" \\( -name \"*.h\" -or -name \"*.m\" -or -name \"*.swift\" \\) -not -path \"${SRCROOT}/Carthage/*\" -print0 | xargs -0 egrep --with-filename --line-number --only-matching \"($TAGS).*\\$|($ERRORTAG).*\\$\" | perl -p -e \"s/($TAGS)/ warning: \\$1/\" | perl -p -e \"s/($ERRORTAG)/ error: \\$1/\"\n";
+		};
+		627BE9902855D233005F6627 /* Check TODO, FIXME & XXX */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Check TODO, FIXME & XXX";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "TAGS=\"TODO:|FIXME:|XXX:|\\?\\?\\?:|\\!\\!\\!:\"\nERRORTAG=\"ERROR: \"\nfind \"${SRCROOT}\" \\( -name \"*.h\" -or -name \"*.m\" -or -name \"*.swift\" \\) -not -path \"${SRCROOT}/Carthage/*\" -print0 | xargs -0 egrep --with-filename --line-number --only-matching \"($TAGS).*\\$|($ERRORTAG).*\\$\" | perl -p -e \"s/($TAGS)/ warning: \\$1/\" | perl -p -e \"s/($ERRORTAG)/ error: \\$1/\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -599,8 +630,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				62D343AA23BD5649005BEDF3 /* LogManager.swift in Sources */,
-				62D343A523BCFDC4005BEDF3 /* Colours.swift in Sources */,
+				620EA70E28571A7C002502E7 /* DJLogType.swift in Sources */,
+				627BE98C2854E211005F6627 /* DJLogLine.swift in Sources */,
+				627BE9892854DD06005F6627 /* DJHTML.swift in Sources */,
 				62D343A823BD0B22005BEDF3 /* SysInfo.swift in Sources */,
+				620EA711285724BA002502E7 /* DJColours.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -628,8 +662,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				62E1EBD323BE42DB006FBA07 /* SysInfo.swift in Sources */,
+				620EA70F28571A7C002502E7 /* DJLogType.swift in Sources */,
+				627BE98D2854E211005F6627 /* DJLogLine.swift in Sources */,
 				62E1EBD123BE42AB006FBA07 /* LogManager.swift in Sources */,
-				62E1EBD223BE42B2006FBA07 /* Colours.swift in Sources */,
+				627BE98A2854DD06005F6627 /* DJHTML.swift in Sources */,
+				620EA712285724BA002502E7 /* DJColours.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
