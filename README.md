@@ -6,6 +6,10 @@ DJLogging is a Swift library for iPhone / iPad and Mac. It allows you to log poi
 
 Fully compatible with both Swift and Objective-C projects
 
+Use my [iOS LogViewer](https://github.com/ddaddy/LogViewer) app to easily read the logs on an iOS device
+
+![Screenshot](screenshot1.png) ![Screenshot](screenshot2.png)
+
 ## Integrate using SPM
 
 Simply use SPM to add the package `ddaddy/DJLogging-Swift.git`
