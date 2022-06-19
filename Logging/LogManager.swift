@@ -48,7 +48,7 @@ public func LogMethodCall(_ uuid: UUID?, function: String = #function, file: Str
 
 public func LogMethodCall(_ uuid: UUID?, function: String = #function, file: String = #file, line: Int = #line, logs: [String], type: DJLogType = .standard) {
     let lastPathComponent = URL.init(fileURLWithPath: file).lastPathComponent
-    LogManager.log("\(function) file:\(lastPathComponent) line:\(line)", log: nil, uuid: uuid, type: type)
+    LogManager.log("\(function) file:\(lastPathComponent) line:\(line)", logs: logs, uuid: uuid, type: type)
 }
 
 public func LogRequestResponse(uuid: UUID?, response: URLResponse?, data: Data?, error: Error?, type: DJLogType = .standard) {
