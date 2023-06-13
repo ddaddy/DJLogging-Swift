@@ -252,7 +252,9 @@ public class LogManager: NSObject {
     private func checkLogLength() {
         
         if _logs.count > Self.maxLogLength {
-            print("Log too big: \(_logs.count) so trimming.")
+            if Self.debugLogsToScreen == true {
+                print("Log too big: \(_logs.count) so trimming.")
+            }
             _logs.remove(at: 0)
         }
     }
