@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -608,6 +608,7 @@
 /* Begin PBXShellScriptBuildPhase section */
 		627BE98F2855D217005F6627 /* Check TODO, FIXME & XXX */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -626,6 +627,7 @@
 		};
 		627BE9902855D233005F6627 /* Check TODO, FIXME & XXX */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);

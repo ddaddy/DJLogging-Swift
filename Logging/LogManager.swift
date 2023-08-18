@@ -12,6 +12,7 @@ import UIKit
 #elseif os(macOS)
 
 #endif
+import CryptoKit
 
 public func LogMethodCall(function: String = #function, file: String = #file, line: Int = #line, type: DJLogType = .standard) {
     LogMethodCall(nil, function: function, file: file, line: line, type: type)
@@ -120,6 +121,18 @@ public class LogManager: NSObject {
         
         let log = LogManager.htmlString();
         return log.data(using: .utf8, allowLossyConversion: true)
+    }
+    
+    /**
+     Generates an encrypted file of the `htmlData` log that can be opened by the `LogViewer`
+     */
+    @available(iOS 13.0, macOS 10.15, *)
+    @objc public static func encryptedData() -> Data? {
+        
+        let logData = LogManager.htmlData() ?? Data()
+        let key = SymmetricKey(data: SHA256.hash(data: "DJLogViewer".data(using: .utf8)!))
+        let sealedBox = try! ChaChaPoly.seal(logData, using: key).combined
+        return sealedBox
     }
     
     @objc public static func printLogs() {
