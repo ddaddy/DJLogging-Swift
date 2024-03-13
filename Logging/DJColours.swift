@@ -20,14 +20,14 @@ public typealias DJColor = UIColor
 
 @objc
 public class DJColours: NSObject {
-    @objc public static var white: DJColor    = .white
-    @objc public static var red: DJColor      = DJColor(red: 250.0/255.0, green: 230.0/255.0, blue: 230.0/255.0, alpha: 1.0)
-    @objc public static var orange: DJColor   = DJColor(red: 250.0/255.0, green: 242.0/255.0, blue: 230.0/255.0, alpha: 1.0)
-    @objc public static var yellow: DJColor   = DJColor(red: 250.0/255.0, green: 250.0/255.0, blue: 230.0/255.0, alpha: 1.0)
-    @objc public static var green: DJColor    = DJColor(red: 235.0/255.0, green: 250.0/255.0, blue: 230.0/255.0, alpha: 1.0)
-    @objc public static var blue: DJColor     = DJColor(red: 230.0/255.0, green: 238.0/255.0, blue: 250.0/255.0, alpha: 1.0)
-    @objc public static var purple: DJColor   = DJColor(red: 233.0/255.0, green: 230.0/255.0, blue: 250.0/255.0, alpha: 1.0)
-    @objc public static var pink: DJColor     = DJColor(red: 250.0/255.0, green: 230.0/255.0, blue: 249.0/255.0, alpha: 1.0)
+    @objc public static let white: DJColor    = .white
+    @objc public static let red: DJColor      = DJColor(red: 250.0/255.0, green: 230.0/255.0, blue: 230.0/255.0, alpha: 1.0)
+    @objc public static let orange: DJColor   = DJColor(red: 250.0/255.0, green: 242.0/255.0, blue: 230.0/255.0, alpha: 1.0)
+    @objc public static let yellow: DJColor   = DJColor(red: 250.0/255.0, green: 250.0/255.0, blue: 230.0/255.0, alpha: 1.0)
+    @objc public static let green: DJColor    = DJColor(red: 235.0/255.0, green: 250.0/255.0, blue: 230.0/255.0, alpha: 1.0)
+    @objc public static let blue: DJColor     = DJColor(red: 230.0/255.0, green: 238.0/255.0, blue: 250.0/255.0, alpha: 1.0)
+    @objc public static let purple: DJColor   = DJColor(red: 233.0/255.0, green: 230.0/255.0, blue: 250.0/255.0, alpha: 1.0)
+    @objc public static let pink: DJColor     = DJColor(red: 250.0/255.0, green: 230.0/255.0, blue: 249.0/255.0, alpha: 1.0)
 }
 
 #if os(iOS) || os(watchOS)
