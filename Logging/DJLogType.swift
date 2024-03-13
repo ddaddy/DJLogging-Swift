@@ -27,7 +27,7 @@ import Foundation
  ```
  */
 @objc
-public protocol DJLogType {
+public protocol DJLogType: Sendable {
     var id: UUID { get }
     var name: String { get }
     var colour: DJColor { get }
@@ -43,11 +43,11 @@ public extension DJLogType where Self == DJLogTypeStandard {
 }
 
 @objc
-public class DJLogTypeStandard: NSObject, DJLogType {
-    public var id: UUID = UUID()
-    public var name: String = ""
-    public var colour: DJColor = DJColours.white
+final public class DJLogTypeStandard: NSObject, DJLogType {
+    public let id: UUID = UUID()
+    public let name: String = ""
+    public let colour: DJColor = DJColours.white
     
-    public static var shared: DJLogType = DJLogTypeStandard()
+    public static let shared: DJLogType = DJLogTypeStandard()
     private override init() {}
 }
