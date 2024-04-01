@@ -83,6 +83,7 @@ public class LogManager: NSObject {
         sharedInstance.log(title, log: log, uuid: uuid, type: type)
     }
     
+    @objc(logTitle:logs:uuid:type:)
     public static func log(_ title: String, logs: [String], uuid: UUID?, type: DJLogType = .standard) {
         
         sharedInstance.log(title, logs: logs, uuid: uuid, type: type)
