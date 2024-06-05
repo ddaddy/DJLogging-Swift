@@ -8,7 +8,7 @@
 
 import Foundation
 
-internal struct DJLogLine {
+internal struct DJLogLine : Sendable {
     let id: UUID = UUID()
     var type: DJLogType
     let date: Date
