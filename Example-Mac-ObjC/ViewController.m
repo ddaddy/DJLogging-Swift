@@ -20,7 +20,7 @@
 - (void)viewDidLoad
 {
     // This method is called before AppDelegate's applicationDidFinishLaunching
-    LogManager.debugLogsToScreen = YES;
+    [LogManager setDebugLogsToScreen:YES];
     LogMethodCallWithType(DJLogTypeUI.shared)
     
     [super viewDidLoad];

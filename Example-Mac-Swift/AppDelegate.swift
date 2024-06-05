@@ -14,7 +14,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         
-        LogManager.debugLogsToScreen = true
+        LogManager.setDebugLogsToScreen(true)
         LogMethodCall(type: .ui)
     }
     

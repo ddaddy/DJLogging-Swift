@@ -19,7 +19,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    LogManager.debugLogsToScreen = YES;
+    [LogManager setDebugLogsToScreen:YES];
     LogMethodCallWithType(DJLogTypeUI.shared)
     
     return YES;

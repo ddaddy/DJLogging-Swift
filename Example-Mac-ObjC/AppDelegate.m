@@ -18,7 +18,7 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-    LogManager.debugLogsToScreen = YES;
+    [LogManager setDebugLogsToScreen:YES];
     LogMethodCallWithType(DJLogTypeUI.shared)
 }
 

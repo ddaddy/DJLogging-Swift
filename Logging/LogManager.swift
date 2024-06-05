@@ -64,7 +64,12 @@ public class LogManager: NSObject {
     /**
      Override to print logs to debug console as they are recorded
      */
-    @objc public static var debugLogsToScreen = false
+    private var debugLogsToScreen = false
+    
+    @objc(setDebugLogsToScreen:)
+    public static func setDebugLogsToScreen(_ debug: Bool) {
+        sharedInstance.debugLogsToScreen = debug
+    }
     
     /**
      Override to change the maximum log length.
@@ -186,7 +191,7 @@ public class LogManager: NSObject {
             
             self.checkLogLength()
             
-            if Self.debugLogsToScreen == true {
+            if debugLogsToScreen == true {
                 print("****LogManager**** \(uuid?.uuidString ?? "") \t\(title) \t\(log ?? "")")
             }
         }
@@ -199,7 +204,7 @@ public class LogManager: NSObject {
             
             self.checkLogLength()
             
-            if Self.debugLogsToScreen == true {
+            if debugLogsToScreen == true {
                 print("****LogManager**** \(uuid?.uuidString ?? "") \t\(title) \n\(logs)")
             }
         }
@@ -266,7 +271,7 @@ public class LogManager: NSObject {
     private func checkLogLength() {
         
         if _logs.count > Self.maxLogLength {
-            if Self.debugLogsToScreen == true {
+            if debugLogsToScreen == true {
                 print("Log too big: \(_logs.count) so trimming.")
             }
             _logs.remove(at: 0)

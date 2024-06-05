@@ -13,7 +13,7 @@ class ViewController: NSViewController, NSSharingServiceDelegate {
 
     override func viewDidLoad() {
         
-        LogManager.debugLogsToScreen = true
+        LogManager.setDebugLogsToScreen(true)
         
         LogMethodCall(type: .ui)
         
