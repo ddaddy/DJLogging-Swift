@@ -75,7 +75,12 @@ public class LogManager: NSObject {
      Override to change the maximum log length.
      Default value is `1000`
      */
-    @objc public static var maxLogLength = 1000
+    private var maxLogLength = 1000
+    
+    @objc(setMaxLogLength:)
+    public static func setMaxLogLength(_ length: Int) {
+        sharedInstance.maxLogLength = length
+    }
     
     // MARK: - Public methods
     public static func logString(_ title: String, uuid: UUID? = nil, type: DJLogType = .standard) {
@@ -270,7 +275,7 @@ public class LogManager: NSObject {
     
     private func checkLogLength() {
         
-        if _logs.count > Self.maxLogLength {
+        if _logs.count > maxLogLength {
             if debugLogsToScreen == true {
                 print("Log too big: \(_logs.count) so trimming.")
             }
