@@ -23,22 +23,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 }
 
-class DJLogTypeComms: DJLogType {
-    static var shared: DJLogType = DJLogTypeComms()
-    var id: UUID = UUID()
-    var name: String = "comms"
-    var colour: DJColor = DJColours.orange
+final class DJLogTypeComms: DJLogType {
+    static let shared: DJLogType = DJLogTypeComms()
+    let id: UUID = UUID()
+    let name: String = "comms"
+    let colour: DJColor = DJColours.orange
 }
 
 extension DJLogType where Self == DJLogTypeComms {
     static var comms: DJLogType { DJLogTypeComms.shared }
 }
 
-class DJLogTypeUI: DJLogType {
-    static var shared: DJLogType = DJLogTypeUI()
-    var id: UUID = UUID()
-    var name: String = "ui"
-    var colour: DJColor = DJColours.blue
+final class DJLogTypeUI: DJLogType {
+    static let shared: DJLogType = DJLogTypeUI()
+    let id: UUID = UUID()
+    let name: String = "ui"
+    let colour: DJColor = DJColours.blue
 }
 
 extension DJLogType where Self == DJLogTypeUI {
