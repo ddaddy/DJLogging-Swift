@@ -159,7 +159,7 @@ public class LogManager: NSObject {
     
     @objc public static func clearLog() {
         
-        sharedInstance.serialQueue.async {
+        sharedInstance.serialQueue.sync {
             sharedInstance._logs = []
         }
     }
@@ -190,7 +190,7 @@ public class LogManager: NSObject {
     }
     
     private func log(_ title: String, code: Int? = nil, log: String?, uuid: UUID?, type: DJLogType = .standard) {
-        serialQueue.async {
+        serialQueue.sync {
             let logLine = DJLogLine(uuid: uuid, code: code, title: title, log: log, type: type)
             self._logs.append(logLine)
             
@@ -203,7 +203,7 @@ public class LogManager: NSObject {
     }
     
     private func log(_ title: String, code: Int? = nil, logs: [String], uuid: UUID?, type: DJLogType = .standard) {
-        serialQueue.async {
+        serialQueue.sync {
             let logLine = DJLogLine(uuid: uuid, code: code, title: title, logs: logs, type: type)
             self._logs.append(logLine)
             
