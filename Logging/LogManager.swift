@@ -66,7 +66,7 @@ public final class LogManager: NSObject, @unchecked Sendable {
     private var debugLogsToScreen = false
     
     public static func setDebugLogsToScreen(_ debug: Bool) {
-        sharedInstance.debugLogsToScreen = debug
+        shared.debugLogsToScreen = debug
     }
     
     /**
@@ -76,7 +76,7 @@ public final class LogManager: NSObject, @unchecked Sendable {
     private var maxLogLength = 1000
     
     public static func setMaxLogLength(_ length: Int) {
-        sharedInstance.maxLogLength = length
+        shared.maxLogLength = length
     }
     
     // MARK: - Public methods
@@ -86,17 +86,17 @@ public final class LogManager: NSObject, @unchecked Sendable {
     
     public static func log(_ title: String, log: String?, uuid: UUID?, type: DJLogType = .standard) {
         
-        sharedInstance.log(title, log: log, uuid: uuid, type: type)
+        shared.log(title, log: log, uuid: uuid, type: type)
     }
     
     public static func log(_ title: String, logs: [String], uuid: UUID?, type: DJLogType = .standard) {
         
-        sharedInstance.log(title, logs: logs, uuid: uuid, type: type)
+        shared.log(title, logs: logs, uuid: uuid, type: type)
     }
     
     public static func logRequestResponse(_ response: URLResponse?, data: Data?, error: NSError?, uuid: UUID?, type: DJLogType = .standard) {
         
-        sharedInstance.logRequestResponse(response, data: data, error: error, uuid: uuid, type: type)
+        shared.logRequestResponse(response, data: data, error: error, uuid: uuid, type: type)
     }
     
     /**
@@ -110,9 +110,9 @@ public final class LogManager: NSObject, @unchecked Sendable {
     public static func htmlString() -> String {
         
         // Get the current logs
-        var currentLogs = sharedInstance._logs
+        var currentLogs = shared._logs
         // Add the app info to logs
-        let appInfo = sharedInstance.appInfo
+        let appInfo = shared.appInfo
         currentLogs.append(DJLogLine(uuid: nil, title: "LogManager End", logs: appInfo))
         
         return DJHTML.html(from: currentLogs)
@@ -147,7 +147,7 @@ public final class LogManager: NSObject, @unchecked Sendable {
     
     public static func printLogs() {
         
-        let logs = sharedInstance._logs
+        let logs = shared._logs
         logs.forEach { log in
             print(log.title)
             if let logs = log.logs {
@@ -159,17 +159,17 @@ public final class LogManager: NSObject, @unchecked Sendable {
     @MainActor
     public static func clearLog() {
         
-        sharedInstance.serialQueue.async {
-            sharedInstance._logs = []
+        shared.serialQueue.async {
+            shared._logs = []
             let appInfo = DispatchQueue.main.sync {
-                sharedInstance.appInfo // Incorrect warning in Swift 5, compiles fine in Swift 6
+                shared.appInfo // Incorrect warning in Swift 5, compiles fine in Swift 6
             }
-            sharedInstance.appendToLog(DJLogLine(uuid: nil, title: "LogManager Start (after clearLog)", logs: appInfo))
+            shared.appendToLog(DJLogLine(uuid: nil, title: "LogManager Start (after clearLog)", logs: appInfo))
         }
     }
     
     // MARK: - Private Properties
-    public static let sharedInstance = LogManager()
+    public static let shared = LogManager()
     private var _logs: [DJLogLine] = []
     private let serialQueue = DispatchQueue(label: "DJLoggingSerialQueue")
     
