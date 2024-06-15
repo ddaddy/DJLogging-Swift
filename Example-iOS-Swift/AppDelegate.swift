@@ -9,7 +9,7 @@
 import UIKit
 import DJLogging
 
-@UIApplicationMain
+@main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
