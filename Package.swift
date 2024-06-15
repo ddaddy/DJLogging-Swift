@@ -7,7 +7,7 @@ let package = Package(
     name: "DJLogging",
     platforms: [
         .macOS(.v10_11),
-        .iOS(.v9),
+        .iOS(.v12),
         .watchOS(.v4)
     ],
     products: [
@@ -23,11 +23,7 @@ let package = Package(
             name: "DJLogging",
             path: "Logging/",
             exclude: [
-                "../DJLogging-iOS/",
-                "../DJLogging-MacOS/",
-                "../Example-iOS-ObjC/",
                 "../Example-iOS-Swift/",
-                "../Example-Mac-ObjC/",
                 "../Example-Mac-Swift/"
             ],
             sources: ["../Logging/"]
