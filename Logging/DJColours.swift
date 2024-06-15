@@ -18,16 +18,15 @@ import WatchKit
 public typealias DJColor = UIColor
 #endif
 
-@objc
 public class DJColours: NSObject {
-    @objc public static let white: DJColor    = .white
-    @objc public static let red: DJColor      = DJColor(red: 250.0/255.0, green: 230.0/255.0, blue: 230.0/255.0, alpha: 1.0)
-    @objc public static let orange: DJColor   = DJColor(red: 250.0/255.0, green: 242.0/255.0, blue: 230.0/255.0, alpha: 1.0)
-    @objc public static let yellow: DJColor   = DJColor(red: 250.0/255.0, green: 250.0/255.0, blue: 230.0/255.0, alpha: 1.0)
-    @objc public static let green: DJColor    = DJColor(red: 235.0/255.0, green: 250.0/255.0, blue: 230.0/255.0, alpha: 1.0)
-    @objc public static let blue: DJColor     = DJColor(red: 230.0/255.0, green: 238.0/255.0, blue: 250.0/255.0, alpha: 1.0)
-    @objc public static let purple: DJColor   = DJColor(red: 233.0/255.0, green: 230.0/255.0, blue: 250.0/255.0, alpha: 1.0)
-    @objc public static let pink: DJColor     = DJColor(red: 250.0/255.0, green: 230.0/255.0, blue: 249.0/255.0, alpha: 1.0)
+    public static let white: DJColor    = .white
+    public static let red: DJColor      = DJColor(red: 250.0/255.0, green: 230.0/255.0, blue: 230.0/255.0, alpha: 1.0)
+    public static let orange: DJColor   = DJColor(red: 250.0/255.0, green: 242.0/255.0, blue: 230.0/255.0, alpha: 1.0)
+    public static let yellow: DJColor   = DJColor(red: 250.0/255.0, green: 250.0/255.0, blue: 230.0/255.0, alpha: 1.0)
+    public static let green: DJColor    = DJColor(red: 235.0/255.0, green: 250.0/255.0, blue: 230.0/255.0, alpha: 1.0)
+    public static let blue: DJColor     = DJColor(red: 230.0/255.0, green: 238.0/255.0, blue: 250.0/255.0, alpha: 1.0)
+    public static let purple: DJColor   = DJColor(red: 233.0/255.0, green: 230.0/255.0, blue: 250.0/255.0, alpha: 1.0)
+    public static let pink: DJColor     = DJColor(red: 250.0/255.0, green: 230.0/255.0, blue: 249.0/255.0, alpha: 1.0)
 }
 
 #if os(iOS) || os(watchOS)

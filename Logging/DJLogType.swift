@@ -26,7 +26,6 @@ import Foundation
  }
  ```
  */
-@objc
 public protocol DJLogType: Sendable {
     var id: UUID { get }
     var name: String { get }
@@ -42,7 +41,6 @@ public extension DJLogType where Self == DJLogTypeStandard {
     static var standard: DJLogType { DJLogTypeStandard.shared }
 }
 
-@objc
 final public class DJLogTypeStandard: NSObject, DJLogType {
     public let id: UUID = UUID()
     public let name: String = ""

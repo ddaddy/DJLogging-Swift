@@ -56,7 +56,6 @@ public func LogRequestResponse(uuid: UUID?, response: URLResponse?, data: Data?,
     LogManager.logRequestResponse(response, data: data, error: error as NSError?, uuid: uuid, type: type)
 }
 
-@objc(LogManager)
 public final class LogManager: NSObject, @unchecked Sendable {
     
     // MARK: - Public Properties
@@ -66,7 +65,6 @@ public final class LogManager: NSObject, @unchecked Sendable {
      */
     private var debugLogsToScreen = false
     
-    @objc(setDebugLogsToScreen:)
     public static func setDebugLogsToScreen(_ debug: Bool) {
         sharedInstance.debugLogsToScreen = debug
     }
@@ -77,7 +75,6 @@ public final class LogManager: NSObject, @unchecked Sendable {
      */
     private var maxLogLength = 1000
     
-    @objc(setMaxLogLength:)
     public static func setMaxLogLength(_ length: Int) {
         sharedInstance.maxLogLength = length
     }
@@ -87,19 +84,16 @@ public final class LogManager: NSObject, @unchecked Sendable {
         log(title, log: nil, uuid: uuid, type: type)
     }
     
-    @objc(logTitle:log:uuid:type:)
     public static func log(_ title: String, log: String?, uuid: UUID?, type: DJLogType = .standard) {
         
         sharedInstance.log(title, log: log, uuid: uuid, type: type)
     }
     
-    @objc(logTitle:logs:uuid:type:)
     public static func log(_ title: String, logs: [String], uuid: UUID?, type: DJLogType = .standard) {
         
         sharedInstance.log(title, logs: logs, uuid: uuid, type: type)
     }
     
-    @objc
     public static func logRequestResponse(_ response: URLResponse?, data: Data?, error: NSError?, uuid: UUID?, type: DJLogType = .standard) {
         
         sharedInstance.logRequestResponse(response, data: data, error: error, uuid: uuid, type: type)
@@ -113,7 +107,7 @@ public final class LogManager: NSObject, @unchecked Sendable {
      - Returns: `String` of the entire log in html format
      */
     @MainActor
-    @objc public static func htmlString() -> String {
+    public static func htmlString() -> String {
         
         // Get the current logs
         var currentLogs = sharedInstance._logs
@@ -132,7 +126,7 @@ public final class LogManager: NSObject, @unchecked Sendable {
      - Returns: `Data` of the entire log in html format
      */
     @MainActor
-    @objc public static func htmlData() -> Data? {
+    public static func htmlData() -> Data? {
         
         let log = LogManager.htmlString();
         return log.data(using: .utf8, allowLossyConversion: true)
@@ -143,7 +137,7 @@ public final class LogManager: NSObject, @unchecked Sendable {
      */
     @available(iOS 13.0, macOS 10.15, *)
     @MainActor
-    @objc public static func encryptedData() -> Data? {
+    public static func encryptedData() -> Data? {
         
         let logData = LogManager.htmlData() ?? Data()
         let key = SymmetricKey(data: SHA256.hash(data: "DJLogViewer".data(using: .utf8)!))
@@ -151,7 +145,7 @@ public final class LogManager: NSObject, @unchecked Sendable {
         return sealedBox
     }
     
-    @objc public static func printLogs() {
+    public static func printLogs() {
         
         let logs = sharedInstance._logs
         logs.forEach { log in
