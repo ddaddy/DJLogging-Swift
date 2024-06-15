@@ -15,10 +15,6 @@
 		627BE98A2854DD06005F6627 /* DJHTML.swift in Sources */ = {isa = PBXBuildFile; fileRef = 627BE9882854DD06005F6627 /* DJHTML.swift */; };
 		627BE98C2854E211005F6627 /* DJLogLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 627BE98B2854E211005F6627 /* DJLogLine.swift */; };
 		627BE98D2854E211005F6627 /* DJLogLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 627BE98B2854E211005F6627 /* DJLogLine.swift */; };
-		6283419D2858A85F0051BC57 /* DJLogTypeComms.m in Sources */ = {isa = PBXBuildFile; fileRef = 6283419B2858A85E0051BC57 /* DJLogTypeComms.m */; };
-		6283419E2858A85F0051BC57 /* DJLogTypeUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 6283419C2858A85E0051BC57 /* DJLogTypeUI.m */; };
-		628350EA23BF7A12009334A6 /* SupportMenuController.m in Sources */ = {isa = PBXBuildFile; fileRef = 628350E823BF7A12009334A6 /* SupportMenuController.m */; };
-		62D3437D23BCC6CF005BEDF3 /* DJLogging.h in Headers */ = {isa = PBXBuildFile; fileRef = 62D3437B23BCC6CF005BEDF3 /* DJLogging.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		62D3438A23BCC83D005BEDF3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D3438923BCC83D005BEDF3 /* AppDelegate.swift */; };
 		62D3438E23BCC83D005BEDF3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D3438D23BCC83D005BEDF3 /* ViewController.swift */; };
 		62D3439123BCC83D005BEDF3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 62D3438F23BCC83D005BEDF3 /* Main.storyboard */; };
@@ -26,15 +22,6 @@
 		62D3439623BCC843005BEDF3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 62D3439423BCC843005BEDF3 /* LaunchScreen.storyboard */; };
 		62D343A823BD0B22005BEDF3 /* SysInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D343A723BD0B22005BEDF3 /* SysInfo.swift */; };
 		62D343AA23BD5649005BEDF3 /* LogManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D3439E23BCF2CE005BEDF3 /* LogManager.swift */; };
-		62D343B523BDFBA9005BEDF3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 62D343B423BDFBA9005BEDF3 /* AppDelegate.m */; };
-		62D343BB23BDFBA9005BEDF3 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 62D343BA23BDFBA9005BEDF3 /* ViewController.m */; };
-		62D343BE23BDFBA9005BEDF3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 62D343BC23BDFBA9005BEDF3 /* Main.storyboard */; };
-		62D343C023BDFBAB005BEDF3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 62D343BF23BDFBAB005BEDF3 /* Assets.xcassets */; };
-		62D343C323BDFBAB005BEDF3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 62D343C123BDFBAB005BEDF3 /* LaunchScreen.storyboard */; };
-		62D343C623BDFBAB005BEDF3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 62D343C523BDFBAB005BEDF3 /* main.m */; };
-		62D5D39C28589D980059C3FF /* DJLogTypeUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 62D5D39B28589D980059C3FF /* DJLogTypeUI.m */; };
-		62D5D39F28589DE70059C3FF /* DJLogTypeComms.m in Sources */ = {isa = PBXBuildFile; fileRef = 62D5D39E28589DE70059C3FF /* DJLogTypeComms.m */; };
-		62E1EBCD23BE41C6006FBA07 /* DJLogging.h in Headers */ = {isa = PBXBuildFile; fileRef = 62E1EBCB23BE41C6006FBA07 /* DJLogging.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		62E1EBD123BE42AB006FBA07 /* LogManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D3439E23BCF2CE005BEDF3 /* LogManager.swift */; };
 		62E1EBD323BE42DB006FBA07 /* SysInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D343A723BD0B22005BEDF3 /* SysInfo.swift */; };
 		62E1EBDB23BE4F60006FBA07 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E1EBDA23BE4F60006FBA07 /* AppDelegate.swift */; };
@@ -42,17 +29,8 @@
 		62E1EBDF23BE4F64006FBA07 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 62E1EBDE23BE4F64006FBA07 /* Assets.xcassets */; };
 		62E1EBE223BE4F64006FBA07 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 62E1EBE023BE4F64006FBA07 /* Main.storyboard */; };
 		62E1EBE823BE4FAE006FBA07 /* DJLogging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62E1EBC923BE41C6006FBA07 /* DJLogging.framework */; };
-		62E1EBED23BE59A1006FBA07 /* DJLogging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62D3437823BCC6CF005BEDF3 /* DJLogging.framework */; };
-		62E1EBEE23BE59A1006FBA07 /* DJLogging.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 62D3437823BCC6CF005BEDF3 /* DJLogging.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		62E1EBF023BE59F6006FBA07 /* DJLogging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62D3437823BCC6CF005BEDF3 /* DJLogging.framework */; };
 		62E1EBF123BE59F6006FBA07 /* DJLogging.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 62D3437823BCC6CF005BEDF3 /* DJLogging.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		62E1EBFB23BE6050006FBA07 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 62E1EBFA23BE6050006FBA07 /* AppDelegate.m */; };
-		62E1EBFE23BE6050006FBA07 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 62E1EBFD23BE6050006FBA07 /* ViewController.m */; };
-		62E1EC0023BE6054006FBA07 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 62E1EBFF23BE6054006FBA07 /* Assets.xcassets */; };
-		62E1EC0323BE6054006FBA07 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 62E1EC0123BE6054006FBA07 /* Main.storyboard */; };
-		62E1EC0623BE6054006FBA07 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 62E1EC0523BE6054006FBA07 /* main.m */; };
-		62E1EC0B23BE6079006FBA07 /* DJLogging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62E1EBC923BE41C6006FBA07 /* DJLogging.framework */; };
-		62E1EC0C23BE6079006FBA07 /* DJLogging.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 62E1EBC923BE41C6006FBA07 /* DJLogging.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,27 +41,9 @@
 			remoteGlobalIDString = 62E1EBC823BE41C6006FBA07;
 			remoteInfo = "DJLogging-MacOS";
 		};
-		62E1EC0D23BE6079006FBA07 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 62D3436F23BCC6CE005BEDF3 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 62E1EBC823BE41C6006FBA07;
-			remoteInfo = "DJLogging-MacOS";
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		62E1EBEF23BE59A1006FBA07 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				62E1EBEE23BE59A1006FBA07 /* DJLogging.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		62E1EBF223BE59F6006FBA07 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -95,17 +55,6 @@
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		62E1EC0F23BE607A006FBA07 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				62E1EC0C23BE6079006FBA07 /* DJLogging.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
@@ -113,17 +62,8 @@
 		620EA710285724BA002502E7 /* DJColours.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DJColours.swift; sourceTree = "<group>"; };
 		627BE9882854DD06005F6627 /* DJHTML.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DJHTML.swift; sourceTree = "<group>"; };
 		627BE98B2854E211005F6627 /* DJLogLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DJLogLine.swift; sourceTree = "<group>"; };
-		628341992858A85E0051BC57 /* DJLogTypeComms.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DJLogTypeComms.h; sourceTree = "<group>"; };
-		6283419A2858A85E0051BC57 /* DJLogTypeUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DJLogTypeUI.h; sourceTree = "<group>"; };
-		6283419B2858A85E0051BC57 /* DJLogTypeComms.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DJLogTypeComms.m; sourceTree = "<group>"; };
-		6283419C2858A85E0051BC57 /* DJLogTypeUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DJLogTypeUI.m; sourceTree = "<group>"; };
-		628350E823BF7A12009334A6 /* SupportMenuController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SupportMenuController.m; sourceTree = "<group>"; };
-		628350E923BF7A12009334A6 /* SupportMenuController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SupportMenuController.h; sourceTree = "<group>"; };
 		628886A025D6CCEB0061F651 /* Example-iOS-Swift.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Example-iOS-Swift.entitlements"; sourceTree = "<group>"; };
-		628886A725D6CE280061F651 /* Example-iOS-ObjC.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Example-iOS-ObjC.entitlements"; sourceTree = "<group>"; };
 		62D3437823BCC6CF005BEDF3 /* DJLogging.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DJLogging.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		62D3437B23BCC6CF005BEDF3 /* DJLogging.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DJLogging.h; sourceTree = "<group>"; };
-		62D3437C23BCC6CF005BEDF3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		62D3438723BCC83D005BEDF3 /* Example-iOS-Swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Example-iOS-Swift.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		62D3438923BCC83D005BEDF3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		62D3438D23BCC83D005BEDF3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -133,23 +73,7 @@
 		62D3439723BCC843005BEDF3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		62D3439E23BCF2CE005BEDF3 /* LogManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogManager.swift; sourceTree = "<group>"; };
 		62D343A723BD0B22005BEDF3 /* SysInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SysInfo.swift; sourceTree = "<group>"; };
-		62D343B123BDFBA9005BEDF3 /* Example-iOS-ObjC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Example-iOS-ObjC.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		62D343B323BDFBA9005BEDF3 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		62D343B423BDFBA9005BEDF3 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		62D343B923BDFBA9005BEDF3 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		62D343BA23BDFBA9005BEDF3 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		62D343BD23BDFBA9005BEDF3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		62D343BF23BDFBAB005BEDF3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		62D343C223BDFBAB005BEDF3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		62D343C423BDFBAB005BEDF3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		62D343C523BDFBAB005BEDF3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		62D5D39A28589D980059C3FF /* DJLogTypeUI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DJLogTypeUI.h; sourceTree = "<group>"; };
-		62D5D39B28589D980059C3FF /* DJLogTypeUI.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DJLogTypeUI.m; sourceTree = "<group>"; };
-		62D5D39D28589DE70059C3FF /* DJLogTypeComms.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DJLogTypeComms.h; sourceTree = "<group>"; };
-		62D5D39E28589DE70059C3FF /* DJLogTypeComms.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DJLogTypeComms.m; sourceTree = "<group>"; };
 		62E1EBC923BE41C6006FBA07 /* DJLogging.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DJLogging.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		62E1EBCB23BE41C6006FBA07 /* DJLogging.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DJLogging.h; sourceTree = "<group>"; };
-		62E1EBCC23BE41C6006FBA07 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		62E1EBD823BE4F60006FBA07 /* Example-Mac-Swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Example-Mac-Swift.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		62E1EBDA23BE4F60006FBA07 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		62E1EBDC23BE4F60006FBA07 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -157,16 +81,6 @@
 		62E1EBE123BE4F64006FBA07 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		62E1EBE323BE4F64006FBA07 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		62E1EBE423BE4F64006FBA07 /* Example_Mac_Swift.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Example_Mac_Swift.entitlements; sourceTree = "<group>"; };
-		62E1EBF723BE6050006FBA07 /* Example-Mac-ObjC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Example-Mac-ObjC.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		62E1EBF923BE6050006FBA07 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		62E1EBFA23BE6050006FBA07 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		62E1EBFC23BE6050006FBA07 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		62E1EBFD23BE6050006FBA07 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		62E1EBFF23BE6054006FBA07 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		62E1EC0223BE6054006FBA07 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		62E1EC0423BE6054006FBA07 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		62E1EC0523BE6054006FBA07 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		62E1EC0723BE6054006FBA07 /* Example_Mac_ObjC.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Example_Mac_ObjC.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -185,14 +99,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		62D343AE23BDFBA9005BEDF3 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				62E1EBED23BE59A1006FBA07 /* DJLogging.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		62E1EBC623BE41C6006FBA07 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -208,36 +114,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		62E1EBF423BE6050006FBA07 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				62E1EC0B23BE6079006FBA07 /* DJLogging.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		628350E723BF7A12009334A6 /* Menu Bar */ = {
-			isa = PBXGroup;
-			children = (
-				628350E923BF7A12009334A6 /* SupportMenuController.h */,
-				628350E823BF7A12009334A6 /* SupportMenuController.m */,
-			);
-			path = "Menu Bar";
-			sourceTree = "<group>";
-		};
 		62D3436E23BCC6CE005BEDF3 = {
 			isa = PBXGroup;
 			children = (
 				62D3439D23BCF2AB005BEDF3 /* Logging */,
-				62D3437A23BCC6CF005BEDF3 /* DJLogging-iOS */,
-				62E1EBCA23BE41C6006FBA07 /* DJLogging-MacOS */,
 				62D3438823BCC83D005BEDF3 /* Example-iOS-Swift */,
-				62D343B223BDFBA9005BEDF3 /* Example-iOS-ObjC */,
 				62E1EBD923BE4F60006FBA07 /* Example-Mac-Swift */,
-				62E1EBF823BE6050006FBA07 /* Example-Mac-ObjC */,
 				62D3437923BCC6CF005BEDF3 /* Products */,
 				62D343AB23BD5678005BEDF3 /* Frameworks */,
 			);
@@ -248,21 +133,10 @@
 			children = (
 				62D3437823BCC6CF005BEDF3 /* DJLogging.framework */,
 				62D3438723BCC83D005BEDF3 /* Example-iOS-Swift.app */,
-				62D343B123BDFBA9005BEDF3 /* Example-iOS-ObjC.app */,
 				62E1EBC923BE41C6006FBA07 /* DJLogging.framework */,
 				62E1EBD823BE4F60006FBA07 /* Example-Mac-Swift.app */,
-				62E1EBF723BE6050006FBA07 /* Example-Mac-ObjC.app */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		62D3437A23BCC6CF005BEDF3 /* DJLogging-iOS */ = {
-			isa = PBXGroup;
-			children = (
-				62D3437B23BCC6CF005BEDF3 /* DJLogging.h */,
-				62D3437C23BCC6CF005BEDF3 /* Info.plist */,
-			);
-			path = "DJLogging-iOS";
 			sourceTree = "<group>";
 		};
 		62D3438823BCC83D005BEDF3 /* Example-iOS-Swift */ = {
@@ -299,36 +173,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		62D343B223BDFBA9005BEDF3 /* Example-iOS-ObjC */ = {
-			isa = PBXGroup;
-			children = (
-				628886A725D6CE280061F651 /* Example-iOS-ObjC.entitlements */,
-				62D343B323BDFBA9005BEDF3 /* AppDelegate.h */,
-				62D343B423BDFBA9005BEDF3 /* AppDelegate.m */,
-				62D343B923BDFBA9005BEDF3 /* ViewController.h */,
-				62D343BA23BDFBA9005BEDF3 /* ViewController.m */,
-				6283419A2858A85E0051BC57 /* DJLogTypeUI.h */,
-				6283419C2858A85E0051BC57 /* DJLogTypeUI.m */,
-				628341992858A85E0051BC57 /* DJLogTypeComms.h */,
-				6283419B2858A85E0051BC57 /* DJLogTypeComms.m */,
-				62D343BC23BDFBA9005BEDF3 /* Main.storyboard */,
-				62D343BF23BDFBAB005BEDF3 /* Assets.xcassets */,
-				62D343C123BDFBAB005BEDF3 /* LaunchScreen.storyboard */,
-				62D343C423BDFBAB005BEDF3 /* Info.plist */,
-				62D343C523BDFBAB005BEDF3 /* main.m */,
-			);
-			path = "Example-iOS-ObjC";
-			sourceTree = "<group>";
-		};
-		62E1EBCA23BE41C6006FBA07 /* DJLogging-MacOS */ = {
-			isa = PBXGroup;
-			children = (
-				62E1EBCB23BE41C6006FBA07 /* DJLogging.h */,
-				62E1EBCC23BE41C6006FBA07 /* Info.plist */,
-			);
-			path = "DJLogging-MacOS";
-			sourceTree = "<group>";
-		};
 		62E1EBD923BE4F60006FBA07 /* Example-Mac-Swift */ = {
 			isa = PBXGroup;
 			children = (
@@ -342,27 +186,6 @@
 			path = "Example-Mac-Swift";
 			sourceTree = "<group>";
 		};
-		62E1EBF823BE6050006FBA07 /* Example-Mac-ObjC */ = {
-			isa = PBXGroup;
-			children = (
-				62E1EBF923BE6050006FBA07 /* AppDelegate.h */,
-				62E1EBFA23BE6050006FBA07 /* AppDelegate.m */,
-				62E1EBFC23BE6050006FBA07 /* ViewController.h */,
-				62E1EBFD23BE6050006FBA07 /* ViewController.m */,
-				62D5D39A28589D980059C3FF /* DJLogTypeUI.h */,
-				62D5D39B28589D980059C3FF /* DJLogTypeUI.m */,
-				62D5D39D28589DE70059C3FF /* DJLogTypeComms.h */,
-				62D5D39E28589DE70059C3FF /* DJLogTypeComms.m */,
-				628350E723BF7A12009334A6 /* Menu Bar */,
-				62E1EBFF23BE6054006FBA07 /* Assets.xcassets */,
-				62E1EC0123BE6054006FBA07 /* Main.storyboard */,
-				62E1EC0423BE6054006FBA07 /* Info.plist */,
-				62E1EC0523BE6054006FBA07 /* main.m */,
-				62E1EC0723BE6054006FBA07 /* Example_Mac_ObjC.entitlements */,
-			);
-			path = "Example-Mac-ObjC";
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -370,7 +193,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				62D3437D23BCC6CF005BEDF3 /* DJLogging.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -378,7 +200,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				62E1EBCD23BE41C6006FBA07 /* DJLogging.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -422,24 +243,6 @@
 			productReference = 62D3438723BCC83D005BEDF3 /* Example-iOS-Swift.app */;
 			productType = "com.apple.product-type.application";
 		};
-		62D343B023BDFBA9005BEDF3 /* Example-iOS-ObjC */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 62D343C723BDFBAB005BEDF3 /* Build configuration list for PBXNativeTarget "Example-iOS-ObjC" */;
-			buildPhases = (
-				62D343AD23BDFBA9005BEDF3 /* Sources */,
-				62D343AE23BDFBA9005BEDF3 /* Frameworks */,
-				62D343AF23BDFBA9005BEDF3 /* Resources */,
-				62E1EBEF23BE59A1006FBA07 /* Embed Frameworks */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "Example-iOS-ObjC";
-			productName = "Example-iOS-ObjC";
-			productReference = 62D343B123BDFBA9005BEDF3 /* Example-iOS-ObjC.app */;
-			productType = "com.apple.product-type.application";
-		};
 		62E1EBC823BE41C6006FBA07 /* DJLogging-MacOS */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 62E1EBCE23BE41C6006FBA07 /* Build configuration list for PBXNativeTarget "DJLogging-MacOS" */;
@@ -477,25 +280,6 @@
 			productReference = 62E1EBD823BE4F60006FBA07 /* Example-Mac-Swift.app */;
 			productType = "com.apple.product-type.application";
 		};
-		62E1EBF623BE6050006FBA07 /* Example-Mac-ObjC */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 62E1EC0823BE6054006FBA07 /* Build configuration list for PBXNativeTarget "Example-Mac-ObjC" */;
-			buildPhases = (
-				62E1EBF323BE6050006FBA07 /* Sources */,
-				62E1EBF423BE6050006FBA07 /* Frameworks */,
-				62E1EBF523BE6050006FBA07 /* Resources */,
-				62E1EC0F23BE607A006FBA07 /* Embed Frameworks */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				62E1EC0E23BE6079006FBA07 /* PBXTargetDependency */,
-			);
-			name = "Example-Mac-ObjC";
-			productName = "Example-Mac-ObjC";
-			productReference = 62E1EBF723BE6050006FBA07 /* Example-Mac-ObjC.app */;
-			productType = "com.apple.product-type.application";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -514,16 +298,10 @@
 					62D3438623BCC83D005BEDF3 = {
 						CreatedOnToolsVersion = 11.3;
 					};
-					62D343B023BDFBA9005BEDF3 = {
-						CreatedOnToolsVersion = 11.3;
-					};
 					62E1EBC823BE41C6006FBA07 = {
 						CreatedOnToolsVersion = 11.3;
 					};
 					62E1EBD723BE4F60006FBA07 = {
-						CreatedOnToolsVersion = 11.3;
-					};
-					62E1EBF623BE6050006FBA07 = {
 						CreatedOnToolsVersion = 11.3;
 					};
 				};
@@ -544,9 +322,7 @@
 				62D3437723BCC6CE005BEDF3 /* DJLogging-iOS */,
 				62E1EBC823BE41C6006FBA07 /* DJLogging-MacOS */,
 				62D3438623BCC83D005BEDF3 /* Example-iOS-Swift */,
-				62D343B023BDFBA9005BEDF3 /* Example-iOS-ObjC */,
 				62E1EBD723BE4F60006FBA07 /* Example-Mac-Swift */,
-				62E1EBF623BE6050006FBA07 /* Example-Mac-ObjC */,
 			);
 		};
 /* End PBXProject section */
@@ -569,16 +345,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		62D343AF23BDFBA9005BEDF3 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				62D343C323BDFBAB005BEDF3 /* LaunchScreen.storyboard in Resources */,
-				62D343C023BDFBAB005BEDF3 /* Assets.xcassets in Resources */,
-				62D343BE23BDFBA9005BEDF3 /* Main.storyboard in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		62E1EBC723BE41C6006FBA07 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -592,15 +358,6 @@
 			files = (
 				62E1EBDF23BE4F64006FBA07 /* Assets.xcassets in Resources */,
 				62E1EBE223BE4F64006FBA07 /* Main.storyboard in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		62E1EBF523BE6050006FBA07 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				62E1EC0023BE6054006FBA07 /* Assets.xcassets in Resources */,
-				62E1EC0323BE6054006FBA07 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -670,18 +427,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		62D343AD23BDFBA9005BEDF3 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				6283419E2858A85F0051BC57 /* DJLogTypeUI.m in Sources */,
-				6283419D2858A85F0051BC57 /* DJLogTypeComms.m in Sources */,
-				62D343BB23BDFBA9005BEDF3 /* ViewController.m in Sources */,
-				62D343B523BDFBA9005BEDF3 /* AppDelegate.m in Sources */,
-				62D343C623BDFBAB005BEDF3 /* main.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		62E1EBC523BE41C6006FBA07 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -704,19 +449,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		62E1EBF323BE6050006FBA07 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				62D5D39F28589DE70059C3FF /* DJLogTypeComms.m in Sources */,
-				62D5D39C28589D980059C3FF /* DJLogTypeUI.m in Sources */,
-				628350EA23BF7A12009334A6 /* SupportMenuController.m in Sources */,
-				62E1EBFE23BE6050006FBA07 /* ViewController.m in Sources */,
-				62E1EC0623BE6054006FBA07 /* main.m in Sources */,
-				62E1EBFB23BE6050006FBA07 /* AppDelegate.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -724,11 +456,6 @@
 			isa = PBXTargetDependency;
 			target = 62E1EBC823BE41C6006FBA07 /* DJLogging-MacOS */;
 			targetProxy = 62E1EBEA23BE4FAE006FBA07 /* PBXContainerItemProxy */;
-		};
-		62E1EC0E23BE6079006FBA07 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 62E1EBC823BE41C6006FBA07 /* DJLogging-MacOS */;
-			targetProxy = 62E1EC0D23BE6079006FBA07 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -749,34 +476,10 @@
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
-		62D343BC23BDFBA9005BEDF3 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				62D343BD23BDFBA9005BEDF3 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		62D343C123BDFBAB005BEDF3 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				62D343C223BDFBAB005BEDF3 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
 		62E1EBE023BE4F64006FBA07 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				62E1EBE123BE4F64006FBA07 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		62E1EC0123BE6054006FBA07 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				62E1EC0223BE6054006FBA07 /* Base */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -928,7 +631,8 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_MODULE_VERIFIER = YES;
-				INFOPLIST_FILE = "DJLogging-iOS/Info.plist";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -966,7 +670,8 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_MODULE_VERIFIER = YES;
-				INFOPLIST_FILE = "DJLogging-iOS/Info.plist";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1033,50 +738,6 @@
 			};
 			name = Release;
 		};
-		62D343C823BDFBAB005BEDF3 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = "Example-iOS-ObjC/Example-iOS-ObjC.entitlements";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = WVY7N532MY;
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
-				INFOPLIST_FILE = "Example-iOS-ObjC/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
-				"IPHONEOS_DEPLOYMENT_TARGET[sdk=macosx*]" = 14.2;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.dappological.Example-iOS-ObjC";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SUPPORTS_MACCATALYST = YES;
-				TARGETED_DEVICE_FAMILY = "1,2,6";
-			};
-			name = Debug;
-		};
-		62D343C923BDFBAB005BEDF3 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = "Example-iOS-ObjC/Example-iOS-ObjC.entitlements";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = WVY7N532MY;
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
-				INFOPLIST_FILE = "Example-iOS-ObjC/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
-				"IPHONEOS_DEPLOYMENT_TARGET[sdk=macosx*]" = 14.2;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.dappological.Example-iOS-ObjC";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SUPPORTS_MACCATALYST = YES;
-				TARGETED_DEVICE_FAMILY = "1,2,6";
-			};
-			name = Release;
-		};
 		62E1EBCF23BE41C6006FBA07 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1090,7 +751,8 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_MODULE_VERIFIER = YES;
-				INFOPLIST_FILE = "DJLogging-MacOS/Info.plist";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1121,7 +783,8 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_MODULE_VERIFIER = YES;
-				INFOPLIST_FILE = "DJLogging-MacOS/Info.plist";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1183,48 +846,6 @@
 			};
 			name = Release;
 		};
-		62E1EC0923BE6054006FBA07 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = "Example-Mac-ObjC/Example_Mac_ObjC.entitlements";
-				CODE_SIGN_IDENTITY = "-";
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				DEAD_CODE_STRIPPING = YES;
-				INFOPLIST_FILE = "Example-Mac-ObjC/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-				);
-				MACOSX_DEPLOYMENT_TARGET = 10.15;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.dappological.Example-Mac-ObjC";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx;
-			};
-			name = Debug;
-		};
-		62E1EC0A23BE6054006FBA07 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = "Example-Mac-ObjC/Example_Mac_ObjC.entitlements";
-				CODE_SIGN_IDENTITY = "-";
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				DEAD_CODE_STRIPPING = YES;
-				INFOPLIST_FILE = "Example-Mac-ObjC/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-				);
-				MACOSX_DEPLOYMENT_TARGET = 10.15;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.dappological.Example-Mac-ObjC";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1255,15 +876,6 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		62D343C723BDFBAB005BEDF3 /* Build configuration list for PBXNativeTarget "Example-iOS-ObjC" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				62D343C823BDFBAB005BEDF3 /* Debug */,
-				62D343C923BDFBAB005BEDF3 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		62E1EBCE23BE41C6006FBA07 /* Build configuration list for PBXNativeTarget "DJLogging-MacOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1278,15 +890,6 @@
 			buildConfigurations = (
 				62E1EBE623BE4F64006FBA07 /* Debug */,
 				62E1EBE723BE4F64006FBA07 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		62E1EC0823BE6054006FBA07 /* Build configuration list for PBXNativeTarget "Example-Mac-ObjC" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				62E1EC0923BE6054006FBA07 /* Debug */,
-				62E1EC0A23BE6054006FBA07 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

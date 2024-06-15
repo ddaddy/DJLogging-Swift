@@ -61,6 +61,13 @@ class ViewController: UIViewController, MFMailComposeViewControllerDelegate {
             self.present(alertController, animated: true, completion: nil)
             
             LogManager.printLogs()
+            
+            let logData = LogManager.htmlData()
+            let temporaryDirectoryURL = URL(fileURLWithPath: NSTemporaryDirectory())
+            let fileURL = temporaryDirectoryURL.appendingPathComponent("logs.html")
+            print(fileURL)
+            
+            try? logData?.write(to: fileURL)
         }
     }
     
