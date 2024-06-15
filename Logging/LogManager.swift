@@ -56,7 +56,7 @@ public func LogRequestResponse(uuid: UUID?, response: URLResponse?, data: Data?,
     LogManager.logRequestResponse(response, data: data, error: error as NSError?, uuid: uuid, type: type)
 }
 
-public final class LogManager: NSObject, @unchecked Sendable {
+public final class LogManager: @unchecked Sendable {
     
     // MARK: - Public Properties
     
@@ -174,8 +174,7 @@ public final class LogManager: NSObject, @unchecked Sendable {
     private let serialQueue = DispatchQueue(label: "DJLoggingSerialQueue")
     
     // MARK: - Init
-    private override init() {
-        super.init()
+    private init() {
 
         // Add the app info to logs to the beggining of the log array
         serialQueue.async {
