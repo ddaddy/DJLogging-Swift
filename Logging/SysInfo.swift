@@ -15,7 +15,8 @@ import UIKit
 import WatchKit
 #endif
 
-internal class SysInfo {
+@MainActor
+final class SysInfo {
     
     internal static func sysInfo() -> String {
         #if os(iOS)
