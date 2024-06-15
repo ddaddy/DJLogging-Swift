@@ -6,6 +6,7 @@
 //  Copyright © 2020 Darren Jones. All rights reserved.
 //
 
+@preconcurrency import Darwin
 import Foundation
 #if os(iOS)
 import UIKit
