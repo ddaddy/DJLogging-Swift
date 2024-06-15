@@ -168,7 +168,7 @@ public final class LogManager: NSObject, @unchecked Sendable {
         sharedInstance.serialQueue.async {
             sharedInstance._logs = []
             let appInfo = DispatchQueue.main.sync {
-                sharedInstance.appInfo
+                sharedInstance.appInfo // Incorrect warning in Swift 5, compiles fine in Swift 6
             }
             sharedInstance.appendToLog(DJLogLine(uuid: nil, title: "LogManager Start (after clearLog)", logs: appInfo))
         }
@@ -186,7 +186,7 @@ public final class LogManager: NSObject, @unchecked Sendable {
         // Add the app info to logs to the beggining of the log array
         serialQueue.async {
             let appInfo = DispatchQueue.main.sync {
-                self.appInfo
+                self.appInfo // Incorrect warning in Swift 5, compiles fine in Swift 6
             }
             self.appendToLog(DJLogLine(uuid: nil, title: "LogManager Start", logs: appInfo))
         }
