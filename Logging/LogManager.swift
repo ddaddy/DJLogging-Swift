@@ -57,7 +57,7 @@ public func LogRequestResponse(uuid: UUID?, response: URLResponse?, data: Data?,
 }
 
 @objc(LogManager)
-public class LogManager: NSObject {
+public final class LogManager: NSObject, @unchecked Sendable {
     
     // MARK: - Public Properties
     
@@ -112,11 +112,14 @@ public class LogManager: NSObject {
      
      - Returns: `String` of the entire log in html format
      */
+    @MainActor
     @objc public static func htmlString() -> String {
         
-        // Add the app info to logs
+        // Get the current logs
         var currentLogs = sharedInstance._logs
-        currentLogs.append(DJLogLine(uuid: nil, title: "LogManager End", logs: sharedInstance.appInfo))
+        // Add the app info to logs
+        let appInfo = sharedInstance.appInfo
+        currentLogs.append(DJLogLine(uuid: nil, title: "LogManager End", logs: appInfo))
         
         return DJHTML.html(from: currentLogs)
     }
@@ -128,6 +131,7 @@ public class LogManager: NSObject {
      
      - Returns: `Data` of the entire log in html format
      */
+    @MainActor
     @objc public static func htmlData() -> Data? {
         
         let log = LogManager.htmlString();
@@ -138,6 +142,7 @@ public class LogManager: NSObject {
      Generates an encrypted file of the `htmlData` log that can be opened by the `LogViewer`
      */
     @available(iOS 13.0, macOS 10.15, *)
+    @MainActor
     @objc public static func encryptedData() -> Data? {
         
         let logData = LogManager.htmlData() ?? Data()
@@ -157,15 +162,20 @@ public class LogManager: NSObject {
         }
     }
     
-    @objc public static func clearLog() {
+    @MainActor
+    public static func clearLog() {
         
-        sharedInstance.serialQueue.sync {
+        sharedInstance.serialQueue.async {
             sharedInstance._logs = []
+            let appInfo = DispatchQueue.main.sync {
+                sharedInstance.appInfo
+            }
+            sharedInstance.appendToLog(DJLogLine(uuid: nil, title: "LogManager Start (after clearLog)", logs: appInfo))
         }
     }
     
     // MARK: - Private Properties
-    private static let sharedInstance = LogManager()
+    public static let sharedInstance = LogManager()
     private var _logs: [DJLogLine] = []
     private let serialQueue = DispatchQueue(label: "DJLoggingSerialQueue")
     
@@ -173,11 +183,17 @@ public class LogManager: NSObject {
     private override init() {
         super.init()
 
-        // Add the app info to logs
-        log("LogManager Start", logs: appInfo, uuid: nil)
+        // Add the app info to logs to the beggining of the log array
+        serialQueue.async {
+            let appInfo = DispatchQueue.main.sync {
+                self.appInfo
+            }
+            self.appendToLog(DJLogLine(uuid: nil, title: "LogManager Start", logs: appInfo))
+        }
     }
     
     // MARK: - Internal
+    @MainActor
     private var appInfo: [String] {
         let appName = Bundle.main.object(forInfoDictionaryKey: "CFBundleName") ?? ""
         let appVersion = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") ?? ""
@@ -189,29 +205,17 @@ public class LogManager: NSObject {
                 "Memory Use: \(SysInfo.memoryUse())"]
     }
     
-    private func log(_ title: String, code: Int? = nil, log: String?, uuid: UUID?, type: DJLogType = .standard) {
-        serialQueue.sync {
+    public func log(_ title: String, code: Int? = nil, log: String?, uuid: UUID?, type: DJLogType = .standard) {
+        serialQueue.async {
             let logLine = DJLogLine(uuid: uuid, code: code, title: title, log: log, type: type)
-            self._logs.append(logLine)
-            
-            self.checkLogLength()
-            
-            if debugLogsToScreen == true {
-                print("****LogManager**** \(uuid?.uuidString ?? "") \t\(title) \t\(log ?? "")")
-            }
+            self.appendToLog(logLine)
         }
     }
     
     private func log(_ title: String, code: Int? = nil, logs: [String], uuid: UUID?, type: DJLogType = .standard) {
-        serialQueue.sync {
+        serialQueue.async {
             let logLine = DJLogLine(uuid: uuid, code: code, title: title, logs: logs, type: type)
-            self._logs.append(logLine)
-            
-            self.checkLogLength()
-            
-            if debugLogsToScreen == true {
-                print("****LogManager**** \(uuid?.uuidString ?? "") \t\(title) \n\(logs)")
-            }
+            self.appendToLog(logLine)
         }
     }
     
@@ -272,8 +276,33 @@ public class LogManager: NSObject {
         
         log(title ?? "", code: code, logs: logs, uuid: uuid, type: type)
     }
+}
+
+private extension LogManager {
     
-    private func checkLogLength() {
+    /**
+     This is the internal function that appends log lines to the log array. It must only ever be called from the private serialQueue so everything is recorded in order.
+     */
+    func appendToLog(_ logLine: DJLogLine) {
+        
+        if #available(macOS 10.12, *) {
+            dispatchPrecondition(condition: .onQueue(serialQueue)) // make sure caller used correct queue
+        }
+        
+        _logs.append(logLine)
+        
+        if self.debugLogsToScreen == true {
+            print("****LogManager**** \(logLine.uuid?.uuidString ?? "") \t\(logLine.title) \((logLine.logs != nil) ? "\n\t\(logLine.logs!)" : "")")
+        }
+        
+        checkLogLength()
+    }
+    
+    func checkLogLength() {
+        
+        if #available(macOS 10.12, *) {
+            dispatchPrecondition(condition: .onQueue(serialQueue)) // make sure caller used correct queue
+        }
         
         if _logs.count > maxLogLength {
             if debugLogsToScreen == true {
@@ -282,7 +311,6 @@ public class LogManager: NSObject {
             _logs.remove(at: 0)
         }
     }
-    
 }
 
 // MARK: - Helpers
