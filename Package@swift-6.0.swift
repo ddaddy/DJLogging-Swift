@@ -1,4 +1,4 @@
-// swift-tools-version:5.6
+// swift-tools-version:6.0
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
@@ -6,7 +6,7 @@ import PackageDescription
 let package = Package(
     name: "DJLogging",
     platforms: [
-        .macOS(.v10_11),
+        .macOS(.v10_13),
         .iOS(.v12),
         .watchOS(.v6)
     ],
@@ -26,7 +26,10 @@ let package = Package(
                 "../Example-iOS-Swift/",
                 "../Example-Mac-Swift/"
             ],
-            sources: ["../Logging/"]
+            sources: ["../Logging/"],
+            swiftSettings: [
+                .swiftLanguageVersion(.v6)
+            ]
         )
     ]
 )
