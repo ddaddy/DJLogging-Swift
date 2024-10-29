@@ -28,7 +28,7 @@ let package = Package(
             ],
             sources: ["../Logging/"],
             swiftSettings: [
-                .swiftLanguageVersion(.v6)
+                .swiftLanguageMode(.v5)
             ]
         )
     ]
