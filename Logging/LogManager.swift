@@ -53,7 +53,7 @@ public func LogMethodCall(_ uuid: UUID?, function: String = #function, file: Str
 }
 
 public func LogRequestResponse(uuid: UUID?, response: URLResponse?, data: Data?, error: Error?, type: DJLogType = .standard) {
-    LogManager.logRequestResponse(response, data: data, error: error as NSError?, uuid: uuid, type: type)
+    LogManager.logRequestResponse(response, data: data, error: error, uuid: uuid, type: type)
 }
 
 public final class LogManager: @unchecked Sendable {
@@ -94,7 +94,7 @@ public final class LogManager: @unchecked Sendable {
         shared.log(title, logs: logs, uuid: uuid, type: type)
     }
     
-    public static func logRequestResponse(_ response: URLResponse?, data: Data?, error: NSError?, uuid: UUID?, type: DJLogType = .standard) {
+    public static func logRequestResponse(_ response: URLResponse?, data: Data?, error: Error?, uuid: UUID?, type: DJLogType = .standard) {
         
         shared.logRequestResponse(response, data: data, error: error, uuid: uuid, type: type)
     }
@@ -212,10 +212,10 @@ public final class LogManager: @unchecked Sendable {
         }
     }
     
-    private func logRequestResponse(_ response: URLResponse?, data: Data?, error: NSError?, uuid: UUID?, type: DJLogType = .standard) {
+    private func logRequestResponse(_ response: URLResponse?, data: Data?, error: Error?, uuid: UUID?, type: DJLogType = .standard) {
         
         var underlyingError: NSError? = nil
-        if let error = error {
+        if let error = error as? NSError {
             if (error.userInfo[NSUnderlyingErrorKey] != nil) {
                 underlyingError = error.userInfo[NSUnderlyingErrorKey] as? NSError
             }
@@ -223,7 +223,7 @@ public final class LogManager: @unchecked Sendable {
         
         let logs = [
             "Response: \(response?.description ?? "")",
-            "Error: \(error?.description ?? "")",
+            "Error: \(error?.localizedDescription ?? "")",
             "UnderlyingError: \(underlyingError?.description ?? "")",
             "Data: \(String(describing: data))",
             "Decoded: \(data?.string ?? "")"
@@ -256,8 +256,7 @@ public final class LogManager: @unchecked Sendable {
         }
         
         var code = response?.getStatusCode()
-        if code == nil,
-           let error = error {
+        if code == nil, let error = error as? NSError {
             code = error.code
         } else {
             if code == 200 {
