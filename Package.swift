@@ -6,7 +6,7 @@ import PackageDescription
 let package = Package(
     name: "DJLogging",
     platforms: [
-        .macOS(.v10_11),
+        .macOS(.v10_13),
         .iOS(.v12),
         .watchOS(.v6)
     ],
