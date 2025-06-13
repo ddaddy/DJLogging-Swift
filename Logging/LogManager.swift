@@ -259,7 +259,7 @@ public final class LogManager: @unchecked Sendable {
         if code == nil, let error = error as? NSError {
             code = error.code
         } else {
-            if code == 200 {
+            if let code, 200...299 ~= code {
                 title = "✅ \(title ?? "")"
             } else {
                 title = "⚠️ \(title ?? "")"
