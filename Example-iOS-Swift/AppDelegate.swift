@@ -25,7 +25,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 final class DJLogTypeComms: DJLogType {
     static let shared: DJLogType = DJLogTypeComms()
-    let id: UUID = UUID()
     let name: String = "comms"
     let colour: DJColor = DJColours.orange
 }
@@ -36,7 +35,6 @@ extension DJLogType where Self == DJLogTypeComms {
 
 final class DJLogTypeUI: DJLogType {
     static let shared: DJLogType = DJLogTypeUI()
-    let id: UUID = UUID()
     let name: String = "ui"
     let colour: DJColor = DJColours.blue
 }
