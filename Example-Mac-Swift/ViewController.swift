@@ -18,9 +18,6 @@ class ViewController: NSViewController, NSSharingServiceDelegate {
         LogMethodCall(type: .ui)
         
         super.viewDidLoad()
-        
-        makeAWebRequest(url: URL(string: "https://venderbase.com")!)
-        makeAWebRequest(url: URL(string: "https://somethingnotvalidxxx.com")!)
     }
     
     func makeAWebRequest(url: URL) {
@@ -34,6 +31,11 @@ class ViewController: NSViewController, NSSharingServiceDelegate {
             LogRequestResponse(uuid: uuid, response: response, data: data, error: error, type: .comms)
         }
         task.resume()
+    }
+    
+    @IBAction func testCommsButtonPressed(_ sender: Any) {
+        makeAWebRequest(url: URL(string: "https://venderbase.com")!)
+        makeAWebRequest(url: URL(string: "https://somethingnotvalidxxx.com")!)
     }
 
     @IBAction func emailSupportButtonPressed(_ sender: Any) {

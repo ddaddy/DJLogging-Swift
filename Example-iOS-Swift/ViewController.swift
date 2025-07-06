@@ -17,8 +17,6 @@ class ViewController: UIViewController, MFMailComposeViewControllerDelegate {
         LogMethodCall(type: .ui)
         
         super.viewDidLoad()
-        
-        makeAWebRequest()
     }
     
     func makeAWebRequest() {
@@ -32,6 +30,10 @@ class ViewController: UIViewController, MFMailComposeViewControllerDelegate {
             LogRequestResponse(uuid: uuid, response: response, data: data, error: error, type: .comms)
         }
         task.resume()
+    }
+    
+    @IBAction func testCommsButtonPressed(_ sender: Any) {
+        makeAWebRequest()
     }
     
     @IBAction func emailSupportButtonPressed(_ sender: Any) {
