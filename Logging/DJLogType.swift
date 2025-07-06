@@ -45,12 +45,11 @@ public extension DJLogType where Self == DJLogTypeStandard {
     static var standard: DJLogType { DJLogTypeStandard.shared }
 }
 
-final public class DJLogTypeStandard: NSObject, DJLogType {
+final public class DJLogTypeStandard: DJLogType {
     public let name: String = ""
     public let colour: DJColor = DJColours.white
     
     public static let shared: DJLogType = DJLogTypeStandard()
-    private override init() {}
 }
 
 /// Used to decode stored log lines
