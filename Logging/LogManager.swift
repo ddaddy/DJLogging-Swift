@@ -10,7 +10,7 @@ import Foundation
 #if os(iOS)
 import UIKit
 #elseif os(macOS)
-
+import AppKit
 #endif
 import CryptoKit
 
@@ -214,6 +214,27 @@ public final class LogManager: @unchecked Sendable {
             }
             self.appendToLog(DJLogLine(uuid: nil, title: "LogManager Start", logs: appInfo))
         }
+        
+        installTerminationObserver()
+    }
+    
+    private func installTerminationObserver() {
+#if os(iOS) || os(tvOS) || os(watchOS)
+        NotificationCenter.default.addObserver(forName: UIApplication.willTerminateNotification, object: nil, queue: nil) { [weak self] _ in
+            self?.handleTermination()
+        }
+#elseif os(macOS)
+        NotificationCenter.default.addObserver(forName: NSApplication.willTerminateNotification, object: nil, queue: nil) { [weak self] _ in
+            self?.handleTermination()
+        }
+#endif
+    }
+    
+    private func handleTermination() {
+        serialQueue.sync {
+            pendingFlushCount = 0
+            persistToDisk()
+        }
     }
     
     // MARK: - Internal
@@ -314,6 +335,10 @@ private extension LogManager {
         
         _logs.append(logLine)
         pendingFlushCount += 1
+        if pendingFlushCount == 1 {
+            // Only need to disable this once we have 1 log not written to disk
+            enableSuddenTermination(false)
+        }
         
         if self.debugLogsToScreen == true {
             print("****LogManager**** \(logLine.uuid?.uuidString ?? "") \t\(logLine.title) \((logLine.logs != nil) ? "\n\t\(logLine.logs!)" : "")")
@@ -354,7 +379,43 @@ private extension LogManager {
         if self.debugLogsToScreen == true {
             print("Saved logs to disk:", logFileURL)
         }
+        
+        enableSuddenTermination(true)
     }
+    
+#if os(macOS)
+    /// Enable/Disable the sudden termination ability of a macOS app.
+    ///
+    /// If the app has defined in it's `Info.plist`:
+    /// ```
+    /// Application can be killed immediately when user is shutting down or logging out
+    /// ```
+    /// then we need to disable it in order to receive `willTerminateNotification`.
+    ///
+    /// We then re-enable it when we're in a state that doesn't require us to need `willTerminateNotification`.
+    private func enableSuddenTermination(_ enable: Bool) {
+        if Self.supportsSuddenTermination {
+            if enable {
+                // Safe to kill again
+                ProcessInfo.processInfo.enableSuddenTermination()
+            } else {
+                ProcessInfo.processInfo.disableSuddenTermination()
+            }
+        }
+    }
+    
+    /// Indicates whether the host app opted in to sudden‑termination via Info.plist
+    private static let supportsSuddenTermination: Bool = {
+        if let flag = Bundle.main.object(forInfoDictionaryKey: "NSSupportsSuddenTermination") as? Bool {
+            return flag
+        } else {
+            return true
+        }
+    }()
+#else
+    /// Does nothing
+    private func enableSuddenTermination(_ enable: Bool) {}
+#endif
 }
 
 // MARK: - Helpers
