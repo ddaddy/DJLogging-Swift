@@ -173,11 +173,42 @@ public final class LogManager: @unchecked Sendable {
     private var _logs: [DJLogLine] = []
     private let serialQueue = DispatchQueue(label: "DJLoggingSerialQueue")
     
+    // MARK: - Persistence
+    private let logDirectoryURL: URL = {
+        let caches = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first!
+        let dir = caches.appendingPathComponent("DJLogs", isDirectory: true)
+        try? FileManager.default.createDirectory(at: dir, withIntermediateDirectories: true)
+        return dir
+    }()
+    
+    private var logFileURL: URL { logDirectoryURL.appendingPathComponent("active.log") }
+    
+    /// Flush in–memory buffer to disk every `flushInterval` seconds **or**
+    /// when `pendingFlushCount` reaches this threshold.
+    private let flushInterval: TimeInterval = 5.0
+    private let flushLineThreshold = 10
+    
+    /// Lines waiting to be persisted.
+    private var pendingFlushCount = 0
+    private var lastFlush = Date()
+    
     // MARK: - Init
     private init() {
-
+        
+        // Load previous session (if any) synchronously *before* we add "LogManager Start".
+        if let data = try? Data(contentsOf: logFileURL) {
+            let lines = data.split(separator: UInt8(ascii: "\n"))
+            _logs = lines.compactMap { try? JSONDecoder().decode(DJLogLine.self, from: Data($0)) }
+        }
+        
         // Add the app info to logs to the beggining of the log array
         serialQueue.async {
+            // Insert explicit session separator.
+            let sessionLine = DJLogLine(uuid: nil,
+                                        title: "===== NEW SESSION \(Date().localFormat()) =====",
+                                        log: nil, type: NewSessionLogType.shared)
+            self.appendToLog(sessionLine)
+            
             let appInfo = DispatchQueue.main.sync {
                 self.appInfo // Incorrect warning in Swift 5, compiles fine in Swift 6
             }
@@ -282,12 +313,21 @@ private extension LogManager {
         }
         
         _logs.append(logLine)
+        pendingFlushCount += 1
         
         if self.debugLogsToScreen == true {
             print("****LogManager**** \(logLine.uuid?.uuidString ?? "") \t\(logLine.title) \((logLine.logs != nil) ? "\n\t\(logLine.logs!)" : "")")
         }
         
         checkLogLength()
+        
+        // ── Persistence logic ──
+        let now = Date()
+        if pendingFlushCount >= flushLineThreshold || now.timeIntervalSince(lastFlush) >= flushInterval {
+            pendingFlushCount = 0
+            lastFlush = now
+            persistToDisk()
+        }
     }
     
     func checkLogLength() {
@@ -301,6 +341,18 @@ private extension LogManager {
                 print("Log too big: \(_logs.count) so trimming.")
             }
             _logs.remove(at: 0)
+        }
+    }
+    
+    // MARK: - Persistence helpers
+    private func persistToDisk() {
+        // Encode every log line to JSON and join with a single newline.
+        let byteSequences = _logs.compactMap { try? JSONEncoder().encode($0) }
+        let joinedBytes = byteSequences.joined(separator: Data([0x0A])) // newline
+        let data = Data(joinedBytes)        // materialise the lazy sequence
+        try? data.write(to: logFileURL, options: .atomic)
+        if self.debugLogsToScreen == true {
+            print("Saved logs to disk:", logFileURL)
         }
     }
 }

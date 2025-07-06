@@ -52,6 +52,14 @@ final public class DJLogTypeStandard: DJLogType {
     public static let shared: DJLogType = DJLogTypeStandard()
 }
 
+// MARK: - Internal New Session log type
+final internal class NewSessionLogType: DJLogType {
+    let name: String = "New Session"
+    let colour: DJColor = .systemGreen
+    static let shared: DJLogType = NewSessionLogType()
+}
+
+// MARK: - Codable
 /// Used to decode stored log lines
 internal struct DecodedLogType: DJLogType {
     let name: String
