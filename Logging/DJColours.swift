@@ -78,3 +78,18 @@ extension NSColor {
     }
 }
 #endif
+
+internal extension DJColor {
+    
+    /// Cross platform helper to pull our RGBA components in sRGB
+    func rgbaComponents() -> [CGFloat]? {
+#if os(macOS)
+        guard let sRGB = self.usingColorSpace(.sRGB) else { return nil }
+        return [sRGB.redComponent, sRGB.greenComponent, sRGB.blueComponent, sRGB.alphaComponent]
+#else
+        var r = CGFloat.zero, g = CGFloat.zero, b = CGFloat.zero, a = CGFloat.zero
+        guard self.getRed(&r, green: &g, blue: &b, alpha: &a) else { return nil }
+        return [r, g, b, a]
+#endif
+    }
+}

@@ -49,3 +49,11 @@ final public class DJLogTypeStandard: NSObject, DJLogType {
     public static let shared: DJLogType = DJLogTypeStandard()
     private override init() {}
 }
+
+/// Used to decode stored log lines
+internal struct DecodedLogType: DJLogType {
+    let id: UUID = UUID()
+    let name: String
+    let colour: DJColor
+    static var shared: DJLogType { fatalError("Decoded types are not singletons") }
+}
