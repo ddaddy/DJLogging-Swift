@@ -46,7 +46,7 @@ internal struct DJHTML {
     
     private static func filterForm(lines: [DJLogLine]) -> String {
         
-        let types = lines.map({ $0.type }).uniques(by: \.id).filter({ $0.name != NewSessionLogType.shared.name })
+        let types = lines.map({ $0.type }).uniques(by: \.id)
         
         return
 """
