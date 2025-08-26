@@ -194,14 +194,12 @@ public final class LogManager: @unchecked Sendable {
     
     // MARK: - Init
     private init() {
-        
-        // Load previous session (if any) synchronously *before* we add "LogManager Start".
-        if let data = try? Data(contentsOf: logFileURL) {
-            let lines = data.split(separator: UInt8(ascii: "\n"))
-            _logs = lines.compactMap { try? JSONDecoder().decode(DJLogLine.self, from: Data($0)) }
-        }
-        
-        // Add the app info to logs to the beggining of the log array
+        // ⚠️ Don’t synchronously read from disk on first use.
+        // We start a new session immediately, then load the previous session logs
+        // on a background thread and prepend them once ready.
+
+        // Start this session right away (keeps first log calls snappy at launch)
+        // Add the app info to logs at the beggining of the log array
         serialQueue.async {
             // Insert explicit session separator.
             let sessionLine = DJLogLine(uuid: nil,
@@ -213,6 +211,18 @@ public final class LogManager: @unchecked Sendable {
                 self.appInfo // Incorrect warning in Swift 5, compiles fine in Swift 6
             }
             self.appendToLog(DJLogLine(uuid: nil, title: "LogManager Start", logs: appInfo))
+        }
+        
+        // Load previous session in the background and prepend when done
+        DispatchQueue.global(qos: .utility).async { [logFileURL] in
+            if let data = try? Data(contentsOf: logFileURL) {
+                let lines = data.split(separator: UInt8(ascii: "\n"))
+                let previous = lines.compactMap { try? JSONDecoder().decode(DJLogLine.self, from: Data($0)) }
+                self.serialQueue.async {
+                    // Prepend previous logs at index 0, so they appear before this session’s header
+                    self._logs.insert(contentsOf: previous, at: 0)
+                }
+            }
         }
         
         installTerminationObserver()
