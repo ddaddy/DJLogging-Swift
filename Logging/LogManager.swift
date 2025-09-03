@@ -253,11 +253,13 @@ public final class LogManager: @unchecked Sendable {
         let appName = Bundle.main.object(forInfoDictionaryKey: "CFBundleName") ?? ""
         let appVersion = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") ?? ""
         let appBuild = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") ?? ""
+        let docsFolder = try? FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
         return ["Appname: \(appName) Version: \(appVersion) Build: \(appBuild)",
                 "SysInfo: \(SysInfo.sysInfo())",
                 "Time/Date: \(Date().localFormat())",
                 "Timezone: \(TimeZone.current.description)",
-                "Memory Use: \(SysInfo.memoryUse())"]
+                "Memory Use: \(SysInfo.memoryUse())",
+                "Documents folder: \(docsFolder?.absoluteString ?? "<nil>")"]
     }
     
     public func log(_ title: String, code: Int? = nil, log: String?, uuid: UUID?, type: DJLogType = .standard) {
