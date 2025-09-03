@@ -55,7 +55,7 @@ final public class DJLogTypeStandard: DJLogType {
 // MARK: - Internal New Session log type
 final internal class NewSessionLogType: DJLogType {
     let name: String = "New Session"
-    let colour: DJColor = .systemGreen
+    let colour: DJColor = DJColor(red: 255.0/255.0, green: 112.0/255.0, blue: 112.0/255.0, alpha: 1.0)
     static let shared: DJLogType = NewSessionLogType()
 }
 
