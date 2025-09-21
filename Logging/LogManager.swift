@@ -221,6 +221,7 @@ public final class LogManager: @unchecked Sendable {
                 self.serialQueue.async {
                     // Prepend previous logs at index 0, so they appear before this session’s header
                     self._logs.insert(contentsOf: previous, at: 0)
+                    self.checkLogLength()
                 }
             }
         }
@@ -374,10 +375,11 @@ private extension LogManager {
         }
         
         if _logs.count > maxLogLength {
+            let overflow = _logs.count - maxLogLength
             if debugLogsToScreen == true {
-                print("Log too big: \(_logs.count) so trimming.")
+                print("Log too big: \(_logs.count). Trimming oldest \(overflow) lines.")
             }
-            _logs.remove(at: 0)
+            _logs.removeFirst(overflow)
         }
     }
     
