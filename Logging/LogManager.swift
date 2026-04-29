@@ -286,13 +286,31 @@ public final class LogManager: @unchecked Sendable {
             }
         }
         
-        let logs = [
-            "Response: \(response?.description ?? "")",
-            "Error: \(error?.localizedDescription ?? "")",
-            "UnderlyingError: \(underlyingError?.description ?? "")",
-            "Data: \(String(describing: data))",
-            "Decoded: \(data?.string ?? "")"
-        ]
+        var logs: [String] = []
+        if let httpResponse = response as? HTTPURLResponse {
+            logs.append("URL: \(httpResponse.url?.absoluteString ?? "")")
+            logs.append("Status code: \(httpResponse.statusCode)")
+        } else if let response {
+            logs.append("Response: \(response)")
+        } else {
+            logs.append("Response: nil")
+        }
+        if let error {
+            logs.append("Error: \(error.localizedDescription)")
+        }
+        if let underlyingError {
+            logs.append("UnderlyingError: \(underlyingError.description)")
+        }
+        if let data {
+            if let string = data.logString {
+                logs.append("Response body: \(string)")
+            } else {
+                logs.append("Response data: \(data.count) bytes")
+                logs.append("Raw data: \(data as NSData)")
+            }
+        } else {
+            logs.append("Response data: nil")
+        }
         
         var title = response?.url?.absoluteString
         if let error = error as? URLError {
@@ -455,7 +473,7 @@ fileprivate extension Date {
 
 fileprivate extension Data {
     
-    var string: String {
+    var logString: String? {
         
         if let converted = String(data: self, encoding: .utf8) {
             return converted
@@ -466,7 +484,7 @@ fileprivate extension Data {
             // Couldn't convert data using NSISOLatin (Strange!) So try another method
             return "NSASCIIStringEncoding \t\(converted)"
         } else {
-            return "CANNOT CONVERT DATA TO STRING! \t\(self)"
+            return nil
         }
     }
 }

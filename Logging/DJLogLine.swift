@@ -38,23 +38,33 @@ internal struct DJLogLine : Sendable, Codable {
     }
     
     internal var html: String {
+        html(session: nil)
+    }
+    
+    internal func html(session: Int?) -> String {
 """
-<tr\(rowType)\(expandClick)>
-    <td>\((logs != nil) ? ">" : "")</td>
+<tr\(rowType)\(sessionData(session))\(expandClick)>
+    <td class="chevron"\(chevronData)>\((logs != nil) ? "&#9656;" : "")</td>
     <td class="date">\(date)</td>
     <td class="type">\(type.name)</td>
     <td class="uuid"\(filterClick)>\(uuid?.uuidString ?? "")</td>
     <td class="code">\(code != nil ? String(describing: code!) : "")</td>
-    <td class="title">\(title.cleanHTML())</td>
+    <td class="title">\(copyURLButton)\(title.cleanHTML())</td>
 </tr>
-\((logs != nil) ? hiddenRows : "")
+\((logs != nil) ? hiddenRows(session: session) : "")
 """
     }
     
     private var rowType: String { " id=\"\(type.id)\" style=\"background-color: \(type.hexColour);\"" }
     private var filterClick: String { (uuid != nil) ? " onclick=\"filter('\(uuid!.uuidString)')\"" : "" }
     private var expandClick: String { (logs != nil) ? " class=\"expandable\" onclick=\"showHideRow('\(id.uuidString)');\"" : ""}
-    private var hiddenRows: String { logs?.map({ $0.hiddenRow(id: id) }).joined(separator: "\n") ?? "" }
+    private var chevronData: String { (logs != nil) ? " data-row=\"\(id.uuidString)\"" : "" }
+    private func sessionData(_ session: Int?) -> String { session.map({ " data-session=\"\($0)\"" }) ?? "" }
+    private func hiddenRows(session: Int?) -> String { logs?.map({ $0.hiddenRow(id: id, session: session) }).joined(separator: "\n") ?? "" }
+    private var copyURLButton: String {
+        guard let url = title.firstURL else { return "" }
+        return "<button type=\"button\" class=\"copyURLButton\" data-url=\"\(url.cleanHTMLAttribute())\" onclick=\"copyURL(this); event.stopPropagation();\">Copy URL</button>"
+    }
     
     // MARK: - Codable
     private enum CodingKeys: String, CodingKey {
@@ -98,16 +108,33 @@ private extension String {
     
     func cleanHTML() -> String {
         self
+            .replacingOccurrences(of: "&", with: "&amp;")
             .replacingOccurrences(of: "<", with: "&lt;")
+            .replacingOccurrences(of: ">", with: "&gt;")
             .replacingOccurrences(of: "    ", with: "&emsp;")
             .replacingOccurrences(of: "\n", with: "<br />")
     }
     
-    func hiddenRow(id: UUID) -> String {
+    func cleanHTMLAttribute() -> String {
+        self
+            .replacingOccurrences(of: "&", with: "&amp;")
+            .replacingOccurrences(of: "\"", with: "&quot;")
+            .replacingOccurrences(of: "<", with: "&lt;")
+            .replacingOccurrences(of: ">", with: "&gt;")
+    }
+    
+    var firstURL: String? {
+        let pattern = #"https?://[^\s<>"']+"#
+        guard let range = self.range(of: pattern, options: .regularExpression) else { return nil }
+        return String(self[range])
+    }
+    
+    func hiddenRow(id: UUID, session: Int?) -> String {
 """
-<tr class="hidden_row \(id.uuidString)">
+<tr class="hidden_row \(id.uuidString)"\(session.map({ " data-session=\"\($0)\"" }) ?? "")>
     <td colspan=7>
-        \(self.cleanHTML())
+        <button type="button" class="copyLogButton" onclick="copyLogPayload(this); event.stopPropagation();">Copy</button>
+        <div class="logPayload">\(self.cleanHTML())</div>
     </td>
 </tr>
 """
