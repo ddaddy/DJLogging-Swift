@@ -10,7 +10,7 @@ import UIKit
 import MessageUI
 import DJLogging
 
-class ViewController: UIViewController, MFMailComposeViewControllerDelegate {
+final class ViewController: UIViewController, @MainActor MFMailComposeViewControllerDelegate {
     
     override func viewDidLoad() {
         
@@ -27,7 +27,7 @@ class ViewController: UIViewController, MFMailComposeViewControllerDelegate {
         let session = URLSession(configuration: .default)
         let task = session.dataTask(with: request) { (data, response, error) in
             
-            LogRequestResponse(uuid: uuid, response: response, data: data, error: error, type: .comms)
+            LogRequestResponse(uuid: uuid, request: request, response: response, data: data, error: error, type: .comms)
         }
         task.resume()
     }
@@ -113,4 +113,3 @@ class ViewController: UIViewController, MFMailComposeViewControllerDelegate {
     }
     
 }
-

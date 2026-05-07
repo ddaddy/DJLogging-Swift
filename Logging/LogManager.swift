@@ -56,6 +56,10 @@ public func LogRequestResponse(uuid: UUID?, response: URLResponse?, data: Data?,
     LogManager.logRequestResponse(response, data: data, error: error, uuid: uuid, type: type)
 }
 
+public func LogRequestResponse(uuid: UUID?, request: URLRequest?, response: URLResponse?, data: Data?, error: Error?, type: DJLogType = .standard) {
+    LogManager.logRequestResponse(request: request, response: response, data: data, error: error, uuid: uuid, type: type)
+}
+
 public final class LogManager: @unchecked Sendable {
     
     // MARK: - Public Properties
@@ -96,7 +100,12 @@ public final class LogManager: @unchecked Sendable {
     
     public static func logRequestResponse(_ response: URLResponse?, data: Data?, error: Error?, uuid: UUID?, type: DJLogType = .standard) {
         
-        shared.logRequestResponse(response, data: data, error: error, uuid: uuid, type: type)
+        shared.logRequestResponse(request: nil, response: response, data: data, error: error, uuid: uuid, type: type)
+    }
+    
+    public static func logRequestResponse(request: URLRequest?, response: URLResponse?, data: Data?, error: Error?, uuid: UUID?, type: DJLogType = .standard) {
+        
+        shared.logRequestResponse(request: request, response: response, data: data, error: error, uuid: uuid, type: type)
     }
     
     /**
@@ -277,7 +286,7 @@ public final class LogManager: @unchecked Sendable {
         }
     }
     
-    private func logRequestResponse(_ response: URLResponse?, data: Data?, error: Error?, uuid: UUID?, type: DJLogType = .standard) {
+    private func logRequestResponse(request: URLRequest?, response: URLResponse?, data: Data?, error: Error?, uuid: UUID?, type: DJLogType = .standard) {
         
         var underlyingError: NSError? = nil
         if let error = error as? NSError {
@@ -287,8 +296,29 @@ public final class LogManager: @unchecked Sendable {
         }
         
         var logs: [String] = []
+        if let request {
+            logs.append("Request URL: \(request.url?.absoluteString ?? "")")
+            if let method = request.httpMethod {
+                logs.append("Request method: \(method)")
+            }
+            if let body = request.httpBody {
+                if let string = body.logString {
+                    logs.append("Request body: \(string)")
+                } else {
+                    logs.append("Request body data: \(body.count) bytes")
+                    logs.append("Request raw body: \(body as NSData)")
+                }
+            }
+        }
         if let httpResponse = response as? HTTPURLResponse {
-            logs.append("URL: \(httpResponse.url?.absoluteString ?? "")")
+            let responseURL = httpResponse.url?.absoluteString ?? ""
+            if let requestURL = request?.url?.absoluteString {
+                if responseURL.normalizedLoggedURL != requestURL.normalizedLoggedURL {
+                    logs.append("Response URL: \(responseURL)")
+                }
+            } else {
+                logs.append("URL: \(responseURL)")
+            }
             logs.append("Status code: \(httpResponse.statusCode)")
         } else if let response {
             logs.append("Response: \(response)")
@@ -468,6 +498,17 @@ fileprivate extension Date {
         formatter.dateStyle = .full
         formatter.timeStyle = .full
         return formatter.string(from: self)
+    }
+}
+
+fileprivate extension String {
+    
+    var normalizedLoggedURL: String {
+        guard var components = URLComponents(string: self) else { return self }
+        if components.path == "/" {
+            components.path = ""
+        }
+        return components.string ?? self
     }
 }
 

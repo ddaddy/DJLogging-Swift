@@ -71,6 +71,8 @@ return """
                 <option value="all">All sessions</option>
 \(sessions.map({ "                <option value=\"\($0.index)\">\($0.title.cleanHTML())</option>" }).joined(separator: "\n"))
             </select>
+            <button type="button" class="sessionJSONButton" onclick="copySessionCommsJSON()">Copy JSON</button>
+            <button type="button" class="sessionJSONButton" onclick="viewSessionCommsJSON()">View JSON</button>
         </fieldset>
         
         <fieldset class="uuidFilterFieldset">
@@ -82,6 +84,12 @@ return """
             <input type="hidden" id="activeUUIDFilter" value="" />
         </fieldset>
     </form>
+    <div id="sessionJSONModal" onclick="hideSessionCommsJSON(event)">
+        <div id="sessionJSONPanel" onclick="event.stopPropagation()">
+            <button type="button" id="sessionJSONCloseButton" onclick="hideSessionCommsJSON()">Close</button>
+            <pre id="sessionJSONOutput"></pre>
+        </div>
+    </div>
 """
     }
     
@@ -203,6 +211,159 @@ return """
     function cleanCopiedPayload(payload) {
         return payload.replace(/^\\s*(Response body|Raw data|URL):\\s*/, "")
     }
+    function sessionCommsJSON() {
+        return JSON.stringify(sessionComms(), null, 2)
+    }
+    function copySessionCommsJSON() {
+        const selectedSession = $("#sessionFilter").val()
+        if (selectedSession === "all") {
+            alert("Select a single session first.")
+            return
+        }
+        copyText(sessionCommsJSON())
+        const buttons = $(".sessionJSONButton")
+        const original = buttons.first().text()
+        buttons.first().text("Copied")
+        setTimeout(function() { buttons.first().text(original) }, 1200)
+    }
+    function viewSessionCommsJSON() {
+        const selectedSession = $("#sessionFilter").val()
+        if (selectedSession === "all") {
+            alert("Select a single session first.")
+            return
+        }
+        $("#sessionJSONOutput").text(sessionCommsJSON())
+        $("#sessionJSONModal").show()
+    }
+    function hideSessionCommsJSON() {
+        $("#sessionJSONModal").hide()
+    }
+    function sessionComms() {
+        const selectedSession = $("#sessionFilter").val()
+        const sessionTitle = $("#sessionFilter option:selected").text()
+        const comms = []
+        
+        $("table tr.expandable").each(function() {
+            const row = $(this)
+            if (selectedSession !== "all" && String(row.data("session")) !== selectedSession) {
+                return
+            }
+            
+            const details = rowDetails(row)
+            const requestURLText = firstDetailValue(details, "Request URL")
+            const urlText = requestURLText || firstDetailValue(details, "URL")
+            const requestMethod = firstDetailValue(details, "Request method")
+            const requestBody = firstDetailValue(details, "Request body")
+            const statusText = firstDetailValue(details, "Status code")
+            const responseBody = firstDetailValue(details, "Response body")
+            if (!urlText && !statusText && responseBody === undefined) {
+                return
+            }
+            
+            comms.push({
+                endpoint: endpointFromURL(urlText),
+                url: urlText || null,
+                method: requestMethod || null,
+                sentParams: sentParams(urlText, requestBody),
+                statusCode: statusText !== undefined ? Number(statusText) : null,
+                responseJSONPayload: parsedJSON(responseBody),
+                responsePayload: responseBody !== undefined ? responseBody : null
+            })
+        })
+        
+        return {
+            session: {
+                index: Number(selectedSession),
+                title: sessionTitle
+            },
+            comms: comms
+        }
+    }
+    function rowDetails(row) {
+        const rowID = row.find(".chevron").data("row")
+        if (!rowID) { return [] }
+        return $("tr." + rowID + " .logPayload").map(function() {
+            return this.innerText
+        }).get()
+    }
+    function firstDetailValue(details, label) {
+        const prefix = label + ":"
+        const detail = details.find(function(value) {
+            return value.indexOf(prefix) === 0
+        })
+        if (detail === undefined) { return undefined }
+        return detail.substring(prefix.length).trim()
+    }
+    function endpointFromURL(urlText) {
+        if (!urlText) { return null }
+        try {
+            const url = new URL(urlText)
+            return url.origin + url.pathname
+        } catch (error) {
+            return urlText
+        }
+    }
+    function paramsFromURL(urlText) {
+        const params = {}
+        if (!urlText) { return params }
+        try {
+            const url = new URL(urlText)
+            url.searchParams.forEach(function(value, key) {
+                if (params[key] === undefined) {
+                    params[key] = value
+                } else if (Array.isArray(params[key])) {
+                    params[key].push(value)
+                } else {
+                    params[key] = [params[key], value]
+                }
+            })
+        } catch (error) {}
+        return params
+    }
+    function sentParams(urlText, requestBody) {
+        const params = paramsFromURL(urlText)
+        const bodyParams = paramsFromBody(requestBody)
+        Object.keys(bodyParams).forEach(function(key) {
+            if (params[key] === undefined) {
+                params[key] = bodyParams[key]
+            } else {
+                params[key] = {
+                    query: params[key],
+                    body: bodyParams[key]
+                }
+            }
+        })
+        return params
+    }
+    function paramsFromBody(requestBody) {
+        if (requestBody === undefined || requestBody === null || requestBody === "") { return {} }
+        const json = parsedJSON(requestBody)
+        if (json !== null) {
+            if (typeof json === "object" && !Array.isArray(json)) { return json }
+            return { body: json }
+        }
+        
+        const params = {}
+        try {
+            if (requestBody.indexOf("=") >= 0) {
+                const searchParams = new URLSearchParams(requestBody)
+                searchParams.forEach(function(value, key) {
+                    params[key] = value
+                })
+                if (Object.keys(params).length > 0) { return params }
+            }
+        } catch (error) {}
+        
+        return { body: requestBody }
+    }
+    function parsedJSON(payload) {
+        if (payload === undefined || payload === null || payload === "") { return null }
+        try {
+            return JSON.parse(payload)
+        } catch (error) {
+            return null
+        }
+    }
 </script>
 """
     }
@@ -319,7 +480,9 @@ return """
     }
     
     .copyLogButton,
-    .copyURLButton {
+    .copyURLButton,
+    .sessionJSONButton,
+    #sessionJSONCloseButton {
         appearance: none;
         border: 1px solid #A4A4A4;
         border-radius: 4px;
@@ -332,12 +495,16 @@ return """
         padding: 3px 7px;
     }
     .copyLogButton:hover,
-    .copyURLButton:hover {
+    .copyURLButton:hover,
+    .sessionJSONButton:hover,
+    #sessionJSONCloseButton:hover {
         background: #ECECEC;
         border-color: #7A7A7A;
     }
     .copyLogButton:active,
-    .copyURLButton:active {
+    .copyURLButton:active,
+    .sessionJSONButton:active,
+    #sessionJSONCloseButton:active {
         background: #E0E0E0;
     }
     .copyLogButton {
@@ -349,11 +516,45 @@ return """
         vertical-align: 1px;
         white-space: nowrap;
     }
+    .sessionJSONButton {
+        margin: 18px 4px;
+    }
     
     .logPayload {
         white-space: pre-wrap;
         word-break: break-word;
         overflow-wrap: anywhere;
+    }
+    #sessionJSONModal {
+        display: none;
+        position: fixed;
+        inset: 0;
+        z-index: 1000;
+        background: rgba(0, 0, 0, 0.35);
+        padding: 32px;
+    }
+    #sessionJSONPanel {
+        box-sizing: border-box;
+        width: 100%;
+        height: 100%;
+        background: #FFFFFF;
+        border: 1px solid #A4A4A4;
+        border-radius: 4px;
+        padding: 16px;
+        overflow: auto;
+    }
+    #sessionJSONCloseButton {
+        float: right;
+        margin-bottom: 12px;
+    }
+    #sessionJSONOutput {
+        clear: both;
+        margin: 0;
+        white-space: pre-wrap;
+        word-break: break-word;
+        overflow-wrap: anywhere;
+        font-family: Menlo, Consolas, monospace;
+        font-size: 12px;
     }
 </style>
 """

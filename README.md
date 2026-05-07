@@ -31,6 +31,7 @@ LogMethodCall(_ uuid: UUID?, logs: [String], type: DJLogType = .standard)
 ```
 ```swift
 LogRequestResponse(uuid: UUID?, response: URLResponse?, data: Data?, error: Error?, type: DJLogType = .standard)
+LogRequestResponse(uuid: UUID?, request: URLRequest?, response: URLResponse?, data: Data?, error: Error?, type: DJLogType = .standard)
 ```
 
 #### Methods
